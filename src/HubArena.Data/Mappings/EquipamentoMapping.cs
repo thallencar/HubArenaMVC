@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class EquipamentoMapping : IEntityTypeConfiguration<Equipamento>
+public class EquipamentoMapping : IEntityTypeConfiguration<EquipamentoModel>
 {
-    public void Configure(EntityTypeBuilder<Equipamento> builder)
+    public void Configure(EntityTypeBuilder<EquipamentoModel> builder)
     {
         builder.HasKey(e => e.IdEquipamento);
 

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
+public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 {
-    public void Configure(EntityTypeBuilder<Endereco> builder)
+    public void Configure(EntityTypeBuilder<EnderecoModel> builder)
     {
         builder.HasKey(e => e.IdEndereco);
 
@@ -43,12 +43,12 @@ public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
         // Relacionamento com Funcionario 1:1
         builder.HasOne(e => e.Funcionario)
             .WithOne(f => f.Endereco)
-            .HasForeignKey<Funcionario>(f => f.IdEndereco);
+            .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
 
         // Relacionamento com Quadra 1:1 
         builder.HasOne(e => e.Quadra)
             .WithOne(q => q.Endereco)
-            .HasForeignKey<Quadra>(q => q.IdEndereco);
+            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
 
         // Relacionamento com Equipamento 1:N 
         builder.HasMany(e => e.Equipamentos)

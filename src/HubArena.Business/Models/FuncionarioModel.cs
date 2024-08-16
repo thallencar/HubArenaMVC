@@ -1,12 +1,12 @@
 ﻿namespace HubArena.Business.Models
 {
-    public class Funcionario : Cadastro
+    public class FuncionarioModel : CadastroModel
     {
         public int IdFuncionario { get; set; }
         public string Cargo { get; set; }
 
         //N..1
-        public IEnumerable<Reserva> Reservas { get; set; }
+        public IEnumerable<ReservaModel> Reservas { get; set; }
 
     }
 }

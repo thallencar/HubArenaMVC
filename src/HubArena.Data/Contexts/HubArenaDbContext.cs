@@ -1,6 +1,5 @@
 ﻿using HubArena.Business.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace HubArena.Data.Contexts
 {
@@ -9,14 +8,14 @@ namespace HubArena.Data.Contexts
         public HubArenaDbContext(DbContextOptions options):base(options) { }
 
         
-        public DbSet<Contato> Contatos { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Equipamento> Equipamentos { get; set; }
-        public DbSet<Esporte> Esportes { get; set; }
-        public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Quadra> Quadras { get; set; }
-        public DbSet<Reserva> Reservas { get; set; }
-        public DbSet<ReservaEquipamento> ReservaEquipamentos { get; set; }
+        public DbSet<ContatoModel> Contatos { get; set; }
+        public DbSet<EnderecoModel> Enderecos { get; set; }
+        public DbSet<EquipamentoModel> Equipamentos { get; set; }
+        public DbSet<EsporteModel> Esportes { get; set; }
+        public DbSet<FuncionarioModel> Funcionarios { get; set; }
+        public DbSet<QuadraModel> Quadras { get; set; }
+        public DbSet<ReservaModel> Reservas { get; set; }
+        public DbSet<ReservaEquipamentoModel> ReservaEquipamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

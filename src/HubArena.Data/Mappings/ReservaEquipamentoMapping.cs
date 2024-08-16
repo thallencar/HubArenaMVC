@@ -1,17 +1,12 @@
 ﻿using HubArena.Business.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HubArena.Data.Mappings
 {
-    public class ReservaEquipamentoMapping : IEntityTypeConfiguration<ReservaEquipamento>
+    public class ReservaEquipamentoMapping : IEntityTypeConfiguration<ReservaEquipamentoModel>
     {
-        public void Configure(EntityTypeBuilder<ReservaEquipamento> builder)
+        public void Configure(EntityTypeBuilder<ReservaEquipamentoModel> builder)
         {
             builder.HasKey(re => re.IdReservaEquipamento);
 

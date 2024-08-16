@@ -1,6 +1,6 @@
 ﻿namespace HubArena.Business.Enums
 {
-    public enum TipoContato
+    public enum TipoContatoEnum
     {
         Celular, Residencial, Comercial, Recados, Emergencia, Desconhecido, Outros
     }

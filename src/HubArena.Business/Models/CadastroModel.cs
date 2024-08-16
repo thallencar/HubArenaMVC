@@ -2,7 +2,7 @@
 
 namespace HubArena.Business.Models
 {
-    public abstract class Cadastro
+    public abstract class CadastroModel
     {
         public int IdCadastro { get; set; }
         public string Nome { get; set; }
@@ -13,15 +13,15 @@ namespace HubArena.Business.Models
         public DateTime DataNascimento { get; set; }
         public string Email { get; set; }
         public string Sexo { get; set; }
-        public StatusPessoa StatusPessoa { get; set; }
-        public TipoUsuario TipoUsuario { get; set; }
+        public StatusPessoaEnum StatusPessoa { get; set; }
+        public TipoUsuarioEnum TipoUsuario { get; set; }
         public DateTime DataRegistro { get; set; } = DateTime.UtcNow;
 
          //1..1
          public int IdEndereco { get; set; }
-         public Endereco Endereco { get; set; }
+         public EnderecoModel Endereco { get; set; }
          //N..1
-         public IEnumerable<Contato> Contatos { get; set; }
+         public IEnumerable<ContatoModel> Contatos { get; set; }
          
     }
 }

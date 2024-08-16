@@ -2,20 +2,20 @@
 
 namespace HubArena.Business.Models
 {
-    public class Equipamento
+    public class EquipamentoModel
     {
         public int IdEquipamento { get; set; }
         public string Nome { get; set; }
         public int Quantidade { get; set; }
-        public StatusEquipamento StatusEquipamento { get; set; }
+        public StatusEquipamentoEnum StatusEquipamento { get; set; }
 
         //N..1
-        public IEnumerable<Esporte> Esportes { get; set; }
+        public IEnumerable<EsporteModel> Esportes { get; set; }
         //N..1
         public int IdEndereco { get; set; }
-        public Endereco Endereco { get; set; }
+        public EnderecoModel Endereco { get; set; }
 
         //N..1
-        public IEnumerable<ReservaEquipamento> ReservaEquipamentos { get; set; }
+        public IEnumerable<ReservaEquipamentoModel> ReservaEquipamentos { get; set; }
     }
 }

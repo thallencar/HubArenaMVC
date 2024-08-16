@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class QuadraMapping : IEntityTypeConfiguration<Quadra>
+public class QuadraMapping : IEntityTypeConfiguration<QuadraModel>
 {
-    public void Configure(EntityTypeBuilder<Quadra> builder)
+    public void Configure(EntityTypeBuilder<QuadraModel> builder)
     {
         builder.HasKey(q => q.IdQuadra);
 
@@ -21,7 +21,7 @@ public class QuadraMapping : IEntityTypeConfiguration<Quadra>
         // Relacionamento com Endereco 1:1
         builder.HasOne(q => q.Endereco)
             .WithOne(e => e.Quadra)
-            .HasForeignKey<Quadra>(q => q.IdEndereco);
+            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
 
         // N:N Quadra - Esporte
         

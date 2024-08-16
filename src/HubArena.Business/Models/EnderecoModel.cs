@@ -1,6 +1,6 @@
 ﻿namespace HubArena.Business.Models
 {
-    public class Endereco
+    public class EnderecoModel
     {
         public int IdEndereco { get; set; }
         public string Cep { get; set; }
@@ -13,14 +13,14 @@
         public string PontoReferencia { get; set; }
 
         //N..1
-        public ICollection<Equipamento> Equipamentos { get; set; } = new List<Equipamento>();
+        public ICollection<EquipamentoModel> Equipamentos { get; set; }
         
         //1..1
         public int IdFuncionario { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public FuncionarioModel Funcionario { get; set; }
         //1..1
         public int IdQuadra { get; set; }
-        public Quadra Quadra { get; set; }
+        public QuadraModel Quadra { get; set; }
 
     }
 }

@@ -4,9 +4,9 @@ using HubArena.Business.Models;
 
 namespace HubArena.Data.Mappings
 {
-    public class FuncionarioMapping : IEntityTypeConfiguration<Funcionario>
+    public class FuncionarioMapping : IEntityTypeConfiguration<FuncionarioModel>
     {
-        public void Configure(EntityTypeBuilder<Funcionario> builder)
+        public void Configure(EntityTypeBuilder<FuncionarioModel> builder)
         {
             builder.HasKey(f => f.IdFuncionario);
 
@@ -51,7 +51,7 @@ namespace HubArena.Data.Mappings
             // Relacionamento com Endereco 1:1
             builder.HasOne(f => f.Endereco)
                 .WithOne(e => e.Funcionario)
-                .HasForeignKey<Funcionario>(f => f.IdEndereco);
+                .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
 
             // Relacionamento com Contato 1:N
             builder.HasMany(f => f.Contatos)

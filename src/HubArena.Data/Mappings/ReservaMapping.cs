@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class ReservaMapping : IEntityTypeConfiguration<Reserva>
+public class ReservaMapping : IEntityTypeConfiguration<ReservaModel>
 {
-    public void Configure(EntityTypeBuilder<Reserva> builder)
+    public void Configure(EntityTypeBuilder<ReservaModel> builder)
     {
         builder.HasKey(r => r.IdReserva);
 

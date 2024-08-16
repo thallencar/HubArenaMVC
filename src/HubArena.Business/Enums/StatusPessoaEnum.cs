@@ -1,6 +1,6 @@
 ﻿namespace HubArena.Business.Enums
 {
-    public enum StatusPessoa
+    public enum StatusPessoaEnum
     {
         Ativo, Inativo, Bloqueado, Suspenso
     }
