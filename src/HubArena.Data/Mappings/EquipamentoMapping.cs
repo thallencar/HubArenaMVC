@@ -15,14 +15,16 @@ public class EquipamentoMapping : IEntityTypeConfiguration<EquipamentoModel>
             .IsRequired()
             .HasColumnType("varchar(100)");
 
-        //Quantidade, Status
 
-        // N:N - Equipamento - Esporte
-
-        // Equipamento com Endereco 1:N
+        // Relacionamento com Esporte 1:N
         builder.HasMany(e => e.Esportes)
             .WithOne(es => es.Equipamento)
             .HasForeignKey(es => es.IdEquipamento);
+
+        // Relacionamento com ReservaEquipamento 1:N
+        builder.HasMany(e => e.ReservaEquipamentos)
+            .WithOne(re => re.Equipamento)
+            .HasForeignKey(e => e.IdEquipamento);
 
         builder.ToTable("TB_EQUIPAMENTO");
     }

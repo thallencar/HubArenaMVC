@@ -11,9 +11,6 @@ public class ReservaMapping : IEntityTypeConfiguration<ReservaModel>
         builder.Property(r => r.IdReserva)
             .ValueGeneratedOnAdd();
 
-        //Data, HorarioInicio, HorarioFim, StatusReserva
-        
-
         // Relacionamento com Quadra 1:N
         builder.HasOne(r => r.Quadra)
             .WithMany(q => q.Reservas)

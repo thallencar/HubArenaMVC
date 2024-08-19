@@ -11,12 +11,13 @@ namespace HubArena.Business.Models
         public StatusQuadraEnum StatusQuadra { get; set; }
 
         //1..1
-        public int IdEndereco { get; set; }
-        public EnderecoModel Endereco { get; set; }
+        public int IdEnderecoQuadra { get; set; }
+        public EnderecoQuadraModel EnderecoQuadra { get; set; }
         //N..1
         public IEnumerable<ReservaModel> Reservas { get; set; }
-        //N..N 
-        public ICollection<EsporteModel> Esportes { get; set; }
-        
+        //1..N
+        public int IdEsporte { get; set; }
+        public EsporteModel Esporte { get; set; }
+
     }
 }

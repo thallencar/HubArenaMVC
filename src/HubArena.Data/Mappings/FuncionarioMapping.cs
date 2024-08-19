@@ -29,34 +29,31 @@ namespace HubArena.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(16)");
 
-            builder.Property(f => f.Cpf)
+            builder.Property(f => f.Documento)
                 .IsRequired()
                 .HasColumnType("varchar(11)");
-
-            builder.Property(f => f.Rg)
-                .IsRequired()
-                .HasColumnType("varchar(9)");
             
-            //DataNascimento
-
             builder.Property(f => f.Email)
                 .IsRequired()
                 .HasColumnType("varchar(60)");
 
             builder.Property(f => f.Sexo)
-                .HasColumnType("varchar(10)");
-            
-            //StatusPessoa, TipoUsuario, DataRegistro
+                .HasColumnType("varchar(10)");           
 
             // Relacionamento com Endereco 1:1
-            builder.HasOne(f => f.Endereco)
+            builder.HasOne(f => f.EnderecoFuncionario)
                 .WithOne(e => e.Funcionario)
-                .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
+                .HasForeignKey<FuncionarioModel>(f => f.IdEnderecoFuncionario);
 
             // Relacionamento com Contato 1:N
             builder.HasMany(f => f.Contatos)
                 .WithOne(ct => ct.Funcionario)
                 .HasForeignKey(ct => ct.IdFuncionario);
+
+            // Relacionamento com Reservas 1:N
+            builder.HasMany(f => f.Reservas)
+                .WithOne(r => r.Funcionario)
+                .HasForeignKey(r => r.IdFuncionario);
 
             builder.ToTable("TB_FUNCIONARIO");
         }

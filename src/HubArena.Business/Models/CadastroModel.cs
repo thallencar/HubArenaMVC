@@ -1,4 +1,5 @@
-﻿using HubArena.Business.Enums;
+﻿/*
+using HubArena.Business.Enums;
 
 namespace HubArena.Business.Models
 {
@@ -25,3 +26,4 @@ namespace HubArena.Business.Models
          
     }
 }
+*/

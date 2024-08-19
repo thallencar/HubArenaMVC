@@ -1,8 +1,13 @@
-﻿namespace HubArena.Business.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HubArena.Business.Models
 {
-    public class EnderecoModel
+    public abstract class EnderecoModel
     {
-        public int IdEndereco { get; set; }
         public string Cep { get; set; }
         public string Estado { get; set; }
         public string Cidade { get; set; }
@@ -11,16 +16,5 @@
         public int Numero { get; set; }
         public string Complemento { get; set; }
         public string PontoReferencia { get; set; }
-
-        //N..1
-        public ICollection<EquipamentoModel> Equipamentos { get; set; }
-        
-        //1..1
-        public int IdFuncionario { get; set; }
-        public FuncionarioModel Funcionario { get; set; }
-        //1..1
-        public int IdQuadra { get; set; }
-        public QuadraModel Quadra { get; set; }
-
     }
 }

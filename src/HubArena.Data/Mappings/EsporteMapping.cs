@@ -23,9 +23,10 @@ public class EsporteMapping : IEntityTypeConfiguration<EsporteModel>
             .WithMany(eq => eq.Esportes)
             .HasForeignKey(e => e.IdEquipamento);
 
-        // Relacionamento Quadra com Esportes N:N
-        
-
+        // Relacionamento Esporte com Quadra 1:N
+        builder.HasMany(e => e.Quadras)
+            .WithOne(q => q.Esporte)
+            .HasForeignKey(q => q.IdEsporte);
 
         builder.ToTable("TB_ESPORTE");
     }

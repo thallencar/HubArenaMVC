@@ -18,7 +18,7 @@ namespace HubArena.Data.Mappings
                 .WithMany(r => r.ReservaEquipamentos)
                 .HasForeignKey(re => re.IdReserva);
 
-            // Relacionamento com Equipamento 1:1
+            // Relacionamento com Equipamento 1:N
             builder.HasOne(re => re.Equipamento)
                 .WithMany(e => e.ReservaEquipamentos)
                 .HasForeignKey(re => re.IdEquipamento);

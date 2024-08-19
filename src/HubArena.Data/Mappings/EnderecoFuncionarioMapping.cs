@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
+public class EnderecoFuncionarioMapping : IEntityTypeConfiguration<EnderecoFuncionarioModel>
 {
-    public void Configure(EntityTypeBuilder<EnderecoModel> builder)
+    public void Configure(EntityTypeBuilder<EnderecoFuncionarioModel> builder)
     {
-        builder.HasKey(e => e.IdEndereco);
+        builder.HasKey(e => e.IdEnderecoFuncionario);
 
-        builder.Property(e => e.IdEndereco)
+        builder.Property(e => e.IdEnderecoFuncionario)
             .ValueGeneratedOnAdd();
 
         builder.Property(e => e.Cep)
@@ -31,7 +31,6 @@ public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
             .IsRequired()
             .HasColumnType("varchar(100)");
 
-        //Numero
 
         builder.Property(e => e.Complemento)
             .HasColumnType("varchar(50)");
@@ -42,21 +41,10 @@ public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 
         // Relacionamento com Funcionario 1:1
         builder.HasOne(e => e.Funcionario)
-            .WithOne(f => f.Endereco)
-            .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
-
-        // Relacionamento com Quadra 1:1 
-        builder.HasOne(e => e.Quadra)
-            .WithOne(q => q.Endereco)
-            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
-
-        // Relacionamento com Equipamento 1:N 
-        builder.HasMany(e => e.Equipamentos)
-           .WithOne(eq => eq.Endereco)
-           .HasForeignKey(eq => eq.IdEndereco);
+            .WithOne(f => f.EnderecoFuncionario)
+            .HasForeignKey<FuncionarioModel>(f => f.IdEnderecoFuncionario);
 
 
-
-        builder.ToTable("TB_ENDERECO");
+        builder.ToTable("TB_ENDERECO_FUNCIONARIO");
     }
 }

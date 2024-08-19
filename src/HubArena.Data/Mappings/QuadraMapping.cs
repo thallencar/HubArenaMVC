@@ -15,15 +15,15 @@ public class QuadraMapping : IEntityTypeConfiguration<QuadraModel>
             .IsRequired()
             .HasColumnType("varchar(150)");
 
-        //Capacidade, TipoQuadra, StatusQuadra
-
-
         // Relacionamento com Endereco 1:1
-        builder.HasOne(q => q.Endereco)
+        builder.HasOne(q => q.EnderecoQuadra)
             .WithOne(e => e.Quadra)
-            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
+            .HasForeignKey<QuadraModel>(q => q.IdEnderecoQuadra);
 
-        // N:N Quadra - Esporte
+        // Relacionamento Quadra com Esporte 1:N
+        builder.HasOne(q => q.Esporte)
+            .WithMany(e => e.Quadras)
+            .HasForeignKey(q => q.IdEsporte);
         
 
         // Relacionamento Quadra com Reserva 1:N
