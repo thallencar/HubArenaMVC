@@ -39,12 +39,6 @@ public class EnderecoFuncionarioMapping : IEntityTypeConfiguration<EnderecoFunci
             .HasColumnType("varchar(100)");
 
 
-        // Relacionamento com Funcionario 1:1
-        builder.HasOne(e => e.Funcionario)
-            .WithOne(f => f.EnderecoFuncionario)
-            .HasForeignKey<FuncionarioModel>(f => f.IdEnderecoFuncionario);
-
-
         builder.ToTable("TB_ENDERECO_FUNCIONARIO");
     }
 }

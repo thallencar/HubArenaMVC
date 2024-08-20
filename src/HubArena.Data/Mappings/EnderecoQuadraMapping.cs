@@ -40,11 +40,6 @@ namespace HubArena.Data.Mappings
             builder.Property(e => e.PontoReferencia)
                 .HasColumnType("varchar(100)");
 
-            // Relacionamento com Quadra 1:1 
-            builder.HasOne(e => e.Quadra)
-                .WithOne(q => q.EnderecoQuadra)
-                .HasForeignKey<QuadraModel>(q => q.IdEnderecoQuadra);
-
 
             builder.ToTable("TB_ENDERECO_QUADRA");
         }
