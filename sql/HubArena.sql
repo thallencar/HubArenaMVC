@@ -11,36 +11,6 @@ GO
 BEGIN TRANSACTION;
 GO
 
-CREATE TABLE [TB_ENDERECO_FUNCIONARIO] (
-    [IdEnderecoFuncionario] int NOT NULL IDENTITY,
-    [IdFuncionario] int NOT NULL,
-    [Cep] varchar(10) NOT NULL,
-    [Estado] varchar(2) NOT NULL,
-    [Cidade] varchar(50) NOT NULL,
-    [Bairro] varchar(50) NOT NULL,
-    [Logradouro] varchar(100) NOT NULL,
-    [Numero] int NOT NULL,
-    [Complemento] varchar(50) NULL,
-    [PontoReferencia] varchar(100) NULL,
-    CONSTRAINT [PK_TB_ENDERECO_FUNCIONARIO] PRIMARY KEY ([IdEnderecoFuncionario])
-);
-GO
-
-CREATE TABLE [TB_ENDERECO_QUADRA] (
-    [IdEnderecoQuadra] int NOT NULL IDENTITY,
-    [IdQuadra] int NOT NULL,
-    [Cep] varchar(10) NOT NULL,
-    [Estado] varchar(2) NOT NULL,
-    [Cidade] varchar(50) NOT NULL,
-    [Bairro] varchar(50) NOT NULL,
-    [Logradouro] varchar(100) NOT NULL,
-    [Numero] int NOT NULL,
-    [Complemento] varchar(50) NULL,
-    [PontoReferencia] varchar(100) NULL,
-    CONSTRAINT [PK_TB_ENDERECO_QUADRA] PRIMARY KEY ([IdEnderecoQuadra])
-);
-GO
-
 CREATE TABLE [TB_EQUIPAMENTO] (
     [IdEquipamento] int NOT NULL IDENTITY,
     [Nome] varchar(100) NOT NULL,
@@ -62,9 +32,7 @@ CREATE TABLE [TB_FUNCIONARIO] (
     [Senha] varchar(16) NOT NULL,
     [StatusPessoa] int NOT NULL,
     [DataRegistro] datetime2 NOT NULL,
-    [IdEnderecoFuncionario] int NOT NULL,
-    CONSTRAINT [PK_TB_FUNCIONARIO] PRIMARY KEY ([IdFuncionario]),
-    CONSTRAINT [FK_TB_FUNCIONARIO_TB_ENDERECO_FUNCIONARIO_IdEnderecoFuncionario] FOREIGN KEY ([IdEnderecoFuncionario]) REFERENCES [TB_ENDERECO_FUNCIONARIO] ([IdEnderecoFuncionario])
+    CONSTRAINT [PK_TB_FUNCIONARIO] PRIMARY KEY ([IdFuncionario])
 );
 GO
 
@@ -90,17 +58,47 @@ CREATE TABLE [TB_CONTATO] (
 );
 GO
 
+CREATE TABLE [TB_ENDERECO_FUNCIONARIO] (
+    [IdEnderecoFuncionario] int NOT NULL IDENTITY,
+    [IdFuncionario] int NOT NULL,
+    [Cep] varchar(10) NOT NULL,
+    [Estado] varchar(2) NOT NULL,
+    [Cidade] varchar(50) NOT NULL,
+    [Bairro] varchar(50) NOT NULL,
+    [Logradouro] varchar(100) NOT NULL,
+    [Numero] int NOT NULL,
+    [Complemento] varchar(50) NULL,
+    [PontoReferencia] varchar(100) NULL,
+    CONSTRAINT [PK_TB_ENDERECO_FUNCIONARIO] PRIMARY KEY ([IdEnderecoFuncionario]),
+    CONSTRAINT [FK_TB_ENDERECO_FUNCIONARIO_TB_FUNCIONARIO_IdFuncionario] FOREIGN KEY ([IdFuncionario]) REFERENCES [TB_FUNCIONARIO] ([IdFuncionario])
+);
+GO
+
 CREATE TABLE [TB_QUADRA] (
     [IdQuadra] int NOT NULL IDENTITY,
     [Nome] varchar(150) NOT NULL,
     [Capacidade] int NOT NULL,
     [TipoQuadra] int NOT NULL,
     [StatusQuadra] int NOT NULL,
-    [IdEnderecoQuadra] int NOT NULL,
     [IdEsporte] int NOT NULL,
     CONSTRAINT [PK_TB_QUADRA] PRIMARY KEY ([IdQuadra]),
-    CONSTRAINT [FK_TB_QUADRA_TB_ENDERECO_QUADRA_IdEnderecoQuadra] FOREIGN KEY ([IdEnderecoQuadra]) REFERENCES [TB_ENDERECO_QUADRA] ([IdEnderecoQuadra]),
     CONSTRAINT [FK_TB_QUADRA_TB_ESPORTE_IdEsporte] FOREIGN KEY ([IdEsporte]) REFERENCES [TB_ESPORTE] ([IdEsporte])
+);
+GO
+
+CREATE TABLE [TB_ENDERECO_QUADRA] (
+    [IdEnderecoQuadra] int NOT NULL IDENTITY,
+    [IdQuadra] int NOT NULL,
+    [Cep] varchar(10) NOT NULL,
+    [Estado] varchar(2) NOT NULL,
+    [Cidade] varchar(50) NOT NULL,
+    [Bairro] varchar(50) NOT NULL,
+    [Logradouro] varchar(100) NOT NULL,
+    [Numero] int NOT NULL,
+    [Complemento] varchar(50) NULL,
+    [PontoReferencia] varchar(100) NULL,
+    CONSTRAINT [PK_TB_ENDERECO_QUADRA] PRIMARY KEY ([IdEnderecoQuadra]),
+    CONSTRAINT [FK_TB_ENDERECO_QUADRA_TB_QUADRA_IdQuadra] FOREIGN KEY ([IdQuadra]) REFERENCES [TB_QUADRA] ([IdQuadra])
 );
 GO
 
@@ -132,13 +130,13 @@ GO
 CREATE INDEX [IX_TB_CONTATO_IdFuncionario] ON [TB_CONTATO] ([IdFuncionario]);
 GO
 
+CREATE UNIQUE INDEX [IX_TB_ENDERECO_FUNCIONARIO_IdFuncionario] ON [TB_ENDERECO_FUNCIONARIO] ([IdFuncionario]);
+GO
+
+CREATE UNIQUE INDEX [IX_TB_ENDERECO_QUADRA_IdQuadra] ON [TB_ENDERECO_QUADRA] ([IdQuadra]);
+GO
+
 CREATE INDEX [IX_TB_ESPORTE_IdEquipamento] ON [TB_ESPORTE] ([IdEquipamento]);
-GO
-
-CREATE UNIQUE INDEX [IX_TB_FUNCIONARIO_IdEnderecoFuncionario] ON [TB_FUNCIONARIO] ([IdEnderecoFuncionario]);
-GO
-
-CREATE UNIQUE INDEX [IX_TB_QUADRA_IdEnderecoQuadra] ON [TB_QUADRA] ([IdEnderecoQuadra]);
 GO
 
 CREATE INDEX [IX_TB_QUADRA_IdEsporte] ON [TB_QUADRA] ([IdEsporte]);
@@ -157,7 +155,7 @@ CREATE INDEX [IX_TB_RESERVA_EQUIPAMENTO_IdReserva] ON [TB_RESERVA_EQUIPAMENTO] (
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240819205019_MappingModels', N'8.0.7');
+VALUES (N'20240820175533_MappingModels', N'8.0.7');
 GO
 
 COMMIT;
