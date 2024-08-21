@@ -1,4 +1,4 @@
-using HubArena.App.Models;
+using HubArena.App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
