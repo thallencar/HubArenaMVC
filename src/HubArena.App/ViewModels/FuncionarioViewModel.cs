@@ -51,9 +51,9 @@ namespace HubArena.App.ViewModels
         //1..1
         public EnderecoFuncionarioModel EnderecoFuncionario { get; set; }
         //N..1
-        public IEnumerable<ContatoModel> Contatos { get; set; }
+        public IEnumerable<ContatoViewModel> Contatos { get; set; }
 
         //N..1
-        public IEnumerable<ReservaModel> Reservas { get; set; }
+        public IEnumerable<ReservaViewModel> Reservas { get; set; }
     }
 }
