@@ -27,9 +27,9 @@ namespace HubArena.Data.Repositories
             await SaveChanges();
         }
 
-        public async Task Delete(TEntity entity)
+        public async Task Delete(int id)
         {
-            Db.Remove(entity);
+            Db.Remove(id);
             await SaveChanges();
         }
 
@@ -58,6 +58,6 @@ namespace HubArena.Data.Repositories
             Db?.Dispose();
         }
 
-        
+       
     }
 }
