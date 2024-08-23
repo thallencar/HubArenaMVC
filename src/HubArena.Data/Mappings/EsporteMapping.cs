@@ -15,13 +15,10 @@ public class EsporteMapping : IEntityTypeConfiguration<EsporteModel>
             .IsRequired()
             .HasColumnType("varchar(100)");
 
-        builder.Property(e => e.Descricao)
-            .HasColumnType("varchar(500)");
-
         // Relacionamento Esporte com Equipamento 1:N
-        builder.HasOne(e => e.Equipamento)
-            .WithMany(eq => eq.Esportes)
-            .HasForeignKey(e => e.IdEquipamento);
+        builder.HasMany(e => e.Equipamentos)
+            .WithOne(eq => eq.Esporte)
+            .HasForeignKey(eq => eq.IdEsporte);
 
         // Relacionamento Esporte com Quadra 1:N
         builder.HasMany(e => e.Quadras)

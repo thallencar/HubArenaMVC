@@ -31,7 +31,6 @@ public class EnderecoFuncionarioMapping : IEntityTypeConfiguration<EnderecoFunci
             .IsRequired()
             .HasColumnType("varchar(100)");
 
-
         builder.Property(e => e.Complemento)
             .HasColumnType("varchar(50)");
 

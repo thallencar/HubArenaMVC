@@ -17,9 +17,9 @@ public class EquipamentoMapping : IEntityTypeConfiguration<EquipamentoModel>
 
 
         // Relacionamento com Esporte 1:N
-        builder.HasMany(e => e.Esportes)
-            .WithOne(es => es.Equipamento)
-            .HasForeignKey(es => es.IdEquipamento);
+        builder.HasOne(eq => eq.Esporte)
+            .WithMany(e => e.Equipamentos)
+            .HasForeignKey(eq => eq.IdEsporte);
 
         // Relacionamento com ReservaEquipamento 1:N
         builder.HasMany(e => e.ReservaEquipamentos)
