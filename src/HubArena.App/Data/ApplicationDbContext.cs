@@ -8,6 +8,6 @@ namespace HubArena.App.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }
+        } 
     }
 }
