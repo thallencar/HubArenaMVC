@@ -21,8 +21,9 @@ namespace HubArena.App.ViewModels
         [DisplayName("Status")]
         public int StatusEquipamento { get; set; }
 
-        //N..1
-        public IEnumerable<EsporteViewModel> Esportes { get; set; }
+        //1..N
+        public int IdEsporte { get; set; }
+
 
         //N..1
         public IEnumerable<ReservaEquipamentoViewModel> ReservaEquipamentos { get; set; }

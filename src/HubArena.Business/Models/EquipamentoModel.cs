@@ -9,8 +9,9 @@ namespace HubArena.Business.Models
         public int Quantidade { get; set; }
         public StatusEquipamentoEnum StatusEquipamento { get; set; }
 
-        //N..1
-        public IEnumerable<EsporteModel> Esportes { get; set; }
+        //1..N
+        public int IdEsporte { get; set; } 
+        public EsporteModel Esporte { get; set; }
 
         //N..1
         public IEnumerable<ReservaEquipamentoModel> ReservaEquipamentos { get; set; }
