@@ -1,8 +1,9 @@
 using HubArena.App.Data;
+using HubArena.Business.Interfaces;
 using HubArena.Data.Contexts;
+using HubArena.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace HubArena.App
 {
@@ -11,11 +12,6 @@ namespace HubArena.App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -29,7 +25,9 @@ namespace HubArena.App
                 options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddScoped<HubArenaDbContext>();    
+            builder.Services.AddScoped<IEsporteRepository, EsporteRepository>();
 
             var app = builder.Build();
 
