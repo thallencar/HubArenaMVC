@@ -14,18 +14,22 @@ namespace HubArena.App.ViewModels
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [StringLength(4, ErrorMessage = "O campo Quantidade deve conter entre {2} e {1} caracteres.", MinimumLength = 1)]
+        [Range(1, 100, ErrorMessage = "O campo Quantidade deve conter entre {1} e {2} caracteres.")]
         public int Quantidade { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [DisplayName("Status")]
+        [DisplayName("Status"), Range(0,5, ErrorMessage = "O campo Status deve conter entre {1} e {2} caracteres.")] 
         public int StatusEquipamento { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório.")]
+        [DisplayName("Esporte")]
         //1..N
         public int IdEsporte { get; set; }
-
+        public EsporteViewModel Esporte { get; set; }
 
         //N..1
         public IEnumerable<ReservaEquipamentoViewModel> ReservaEquipamentos { get; set; }
+
+        public IEnumerable<EsporteViewModel> Esportes { get; set; }
     }
 }

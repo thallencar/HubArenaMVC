@@ -15,5 +15,7 @@ namespace HubArena.App.ViewModels
 
         //1..N
         public IEnumerable<QuadraViewModel> Quadras { get; set; }
+
+        public IEnumerable<EquipamentoViewModel> Equipamentos { get; set; }
     }
 }
