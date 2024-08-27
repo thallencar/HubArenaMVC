@@ -10,8 +10,8 @@ namespace HubArena.Data.Repositories
         protected readonly HubArenaDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public BaseRepository(HubArenaDbContext db) 
-        { 
+        public BaseRepository(HubArenaDbContext db)
+        {
             Db = db;
             DbSet = Db.Set<TEntity>();
         }
@@ -27,9 +27,9 @@ namespace HubArena.Data.Repositories
             await SaveChanges();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(TEntity entity)
         {
-            Db.Remove(id);
+            Db.Remove(entity);
             await SaveChanges();
         }
 
@@ -42,7 +42,7 @@ namespace HubArena.Data.Repositories
         {
             return await DbSet.FindAsync(id);
         }
-       
+
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
             return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
@@ -58,6 +58,6 @@ namespace HubArena.Data.Repositories
             Db?.Dispose();
         }
 
-       
+
     }
 }

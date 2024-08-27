@@ -9,6 +9,11 @@ namespace HubArena.Data.Repositories
     {
         public EquipamentoRepository(HubArenaDbContext context) : base (context) { }
 
+        public async Task<EquipamentoModel> ObterEquipamentoEsporte(int id)
+        {
+            return await Db.Equipamentos.AsNoTracking().Include(eq => eq.Esporte).FirstOrDefaultAsync(eq => eq.IdEquipamento == id);
+        }
+
         public async Task<IEnumerable<EquipamentoModel>> ObterEquipamentosEsportes()
         {
             return await Db.Equipamentos.AsNoTracking().Include(eq => eq.Esporte).OrderBy(eq => eq.Nome).ToListAsync();

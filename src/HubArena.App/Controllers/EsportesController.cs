@@ -103,7 +103,7 @@ namespace HubArena.App.Controllers
 
             if (esporteViewModel == null) return NotFound();
 
-            await _esporteRepository.Delete(id);
+            await _esporteRepository.Delete(_mapper.Map<EsporteModel>(esporteViewModel));
 
             return RedirectToAction("Index");
         }

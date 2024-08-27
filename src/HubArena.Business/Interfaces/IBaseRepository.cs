@@ -8,7 +8,7 @@ namespace HubArena.Business.Interfaces
         Task <IEnumerable<TEntity>> GetAll();
         Task Add(TEntity entity);
         Task Update(TEntity entity);
-        Task Delete(int id);
+        Task Delete(TEntity entity);
         Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
         Task<int> SaveChanges();
     }

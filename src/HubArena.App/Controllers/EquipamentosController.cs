@@ -3,7 +3,6 @@ using HubArena.App.ViewModels;
 using HubArena.Business.Interfaces;
 using HubArena.Business.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace HubArena.App.Controllers
 {
@@ -112,14 +111,14 @@ namespace HubArena.App.Controllers
 
             if (equipamentoViewModel == null) return NotFound();
 
-            await _equipamentoRepository.Delete(id);
+            await _equipamentoRepository.Delete(_mapper.Map<EquipamentoModel>(equipamentoViewModel));
 
             return RedirectToAction("Index");
         }
 
         private async Task<EquipamentoViewModel> ObterEquipamento(int id)
         {
-            return _mapper.Map<EquipamentoViewModel>(await _equipamentoRepository.GetById(id));
+            return _mapper.Map<EquipamentoViewModel>(await _equipamentoRepository.ObterEquipamentoEsporte(id));
         }
 
         private async Task<EquipamentoViewModel> PopularEsportes(EquipamentoViewModel equipamentoViewModel)
