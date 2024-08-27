@@ -1,0 +1,52 @@
+﻿main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+figure {
+    margin: 0;
+    
+}
+
+h1 {
+    font-size: 49px;
+}
+
+.logo-texto {
+    display: flex;
+    font-size: 25px;
+    margin: 10px 0 5px;
+}
+
+.texto-hub {
+    font-family: var(--fonte-quartenaria);
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.texto-arena {
+    font-family: var(--fonte-primaria);
+    font-weight: 400;
+}
+
+.texto-slogan {
+    font-family: var(--fonte-secundaria);
+    font-size: 22px;
+}
+
+.btn-entrar {
+    font: 500 25px var(--fonte-terciaria);
+    text-align: center;
+    background: linear-gradient( 180deg, var(--btn-cor-primaria) 0%, var(--btn-cor-secundaria) 100% );
+    margin: 80px 0 15px;
+    width: 50%;
+    padding: 15px;
+}
+
+.texto-criar-conta {
+    font-size: 20px;
+}

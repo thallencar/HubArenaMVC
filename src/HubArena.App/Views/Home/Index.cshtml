@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<main>
+    <figure class="logo-imagem">
+        <img src="~/img/Logo.svg" alt="" />
+    </figure>
+    <div class="logo-texto">
+        <h1 class="texto-hub">Hub</h1>
+        <h1 class="texto-arena">Arena</h1>
+    </div>
+    <span class="texto-slogan">Alugue. Jogue. Conquiste.</span>
+    <a class="btn-entrar" asp-area="Identity" asp-page="/Account/Login"> ENTRAR </a>
+    <a class="texto-criar-conta" asp-area="Identity" asp-page="/Account/Register">Ainda não possuo uma conta</a>
+</main>
