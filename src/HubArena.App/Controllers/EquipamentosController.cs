@@ -118,7 +118,7 @@ namespace HubArena.App.Controllers
 
         private async Task<EquipamentoViewModel> ObterEquipamento(int id)
         {
-            return _mapper.Map<EquipamentoViewModel>(await _equipamentoRepository.ObterEquipamentoEsporte(id));
+            return _mapper.Map<EquipamentoViewModel>(await _equipamentoRepository.ObterEquipamento(id));
         }
 
         private async Task<EquipamentoViewModel> PopularEsportes(EquipamentoViewModel equipamentoViewModel)
