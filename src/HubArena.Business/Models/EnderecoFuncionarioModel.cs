@@ -7,9 +7,9 @@
 
         //1..1
 
-        public int IdFuncionario { get; set; }
+        public int? IdFuncionario { get; set; } 
         public FuncionarioModel Funcionario { get; set; }
-       
+
 
     }
 }

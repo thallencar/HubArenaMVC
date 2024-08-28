@@ -4,6 +4,7 @@ using HubArena.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    partial class HubArenaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240828204718_UpdateMappingEnderecoFuncionario")]
+    partial class UpdateMappingEnderecoFuncionario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,7 @@ namespace HubArena.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(2)");
 
-                    b.Property<int?>("IdFuncionario")
+                    b.Property<int>("IdFuncionario")
                         .HasColumnType("int");
 
                     b.Property<string>("Logradouro")
@@ -94,6 +97,9 @@ namespace HubArena.Data.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("IdEnderecoFuncionario");
+
+                    b.HasIndex("IdFuncionario")
+                        .IsUnique();
 
                     b.ToTable("TB_ENDERECO_FUNCIONARIO", (string)null);
                 });
@@ -217,9 +223,6 @@ namespace HubArena.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(60)");
 
-                    b.Property<int>("IdEnderecoFuncionario")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
@@ -239,9 +242,6 @@ namespace HubArena.Data.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.HasKey("IdFuncionario");
-
-                    b.HasIndex("IdEnderecoFuncionario")
-                        .IsUnique();
 
                     b.ToTable("TB_FUNCIONARIO", (string)null);
                 });
@@ -348,6 +348,16 @@ namespace HubArena.Data.Migrations
                     b.Navigation("Funcionario");
                 });
 
+            modelBuilder.Entity("HubArena.Business.Models.EnderecoFuncionarioModel", b =>
+                {
+                    b.HasOne("HubArena.Business.Models.FuncionarioModel", "Funcionario")
+                        .WithOne("EnderecoFuncionario")
+                        .HasForeignKey("HubArena.Business.Models.EnderecoFuncionarioModel", "IdFuncionario")
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
             modelBuilder.Entity("HubArena.Business.Models.EnderecoQuadraModel", b =>
                 {
                     b.HasOne("HubArena.Business.Models.QuadraModel", "Quadra")
@@ -366,16 +376,6 @@ namespace HubArena.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Esporte");
-                });
-
-            modelBuilder.Entity("HubArena.Business.Models.FuncionarioModel", b =>
-                {
-                    b.HasOne("HubArena.Business.Models.EnderecoFuncionarioModel", "EnderecoFuncionario")
-                        .WithOne("Funcionario")
-                        .HasForeignKey("HubArena.Business.Models.FuncionarioModel", "IdEnderecoFuncionario")
-                        .IsRequired();
-
-                    b.Navigation("EnderecoFuncionario");
                 });
 
             modelBuilder.Entity("HubArena.Business.Models.QuadraModel", b =>
@@ -422,11 +422,6 @@ namespace HubArena.Data.Migrations
                     b.Navigation("Quadra");
                 });
 
-            modelBuilder.Entity("HubArena.Business.Models.EnderecoFuncionarioModel", b =>
-                {
-                    b.Navigation("Funcionario");
-                });
-
             modelBuilder.Entity("HubArena.Business.Models.EquipamentoModel", b =>
                 {
                     b.Navigation("ReservaEquipamentos");
@@ -442,6 +437,8 @@ namespace HubArena.Data.Migrations
             modelBuilder.Entity("HubArena.Business.Models.FuncionarioModel", b =>
                 {
                     b.Navigation("Contatos");
+
+                    b.Navigation("EnderecoFuncionario");
 
                     b.Navigation("Reservas");
                 });

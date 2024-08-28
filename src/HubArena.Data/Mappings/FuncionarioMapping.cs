@@ -43,7 +43,7 @@ namespace HubArena.Data.Mappings
             // Relacionamento com Endereco 1:1
             builder.HasOne(f => f.EnderecoFuncionario)
                 .WithOne(e => e.Funcionario)
-                .HasForeignKey<EnderecoFuncionarioModel>(e => e.IdFuncionario);
+                .HasForeignKey<FuncionarioModel>(e => e.IdEnderecoFuncionario);
 
             // Relacionamento com Contato 1:N
             builder.HasMany(f => f.Contatos)
