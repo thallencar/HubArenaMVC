@@ -110,7 +110,7 @@ namespace HubArena.App.Controllers
 
         private async Task<EsporteViewModel> ObterEsporte(int id)
         {
-            return _mapper.Map<EsporteViewModel>(await _esporteRepository.GetById(id));
+            return _mapper.Map<EsporteViewModel>(await _esporteRepository.ObterEsporte(id));
         }
     }
 }
