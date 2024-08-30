@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
 
-public class EnderecoFuncionarioMapping : IEntityTypeConfiguration<EnderecoFuncionarioModel>
+public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 {
-    public void Configure(EntityTypeBuilder<EnderecoFuncionarioModel> builder)
+    public void Configure(EntityTypeBuilder<EnderecoModel> builder)
     {
-        builder.HasKey(e => e.IdEnderecoFuncionario);
+        builder.HasKey(e => e.IdEndereco);
 
-        builder.Property(e => e.IdEnderecoFuncionario)
+        builder.Property(e => e.IdEndereco)
             .ValueGeneratedOnAdd();
 
         builder.Property(e => e.Cep)
@@ -38,6 +38,6 @@ public class EnderecoFuncionarioMapping : IEntityTypeConfiguration<EnderecoFunci
             .HasColumnType("varchar(100)");
 
 
-        builder.ToTable("TB_ENDERECO_FUNCIONARIO");
+        builder.ToTable("TB_ENDERECO");
     }
 }

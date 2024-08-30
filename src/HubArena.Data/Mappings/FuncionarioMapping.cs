@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
+using System.Reflection.Emit;
 
 namespace HubArena.Data.Mappings
 {
@@ -41,9 +42,9 @@ namespace HubArena.Data.Mappings
                 .HasColumnType("varchar(10)");           
 
             // Relacionamento com Endereco 1:1
-            builder.HasOne(f => f.EnderecoFuncionario)
+            builder.HasOne(f => f.Endereco)
                 .WithOne(e => e.Funcionario)
-                .HasForeignKey<FuncionarioModel>(e => e.IdEnderecoFuncionario);
+                .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
 
             // Relacionamento com Contato 1:N
             builder.HasMany(f => f.Contatos)

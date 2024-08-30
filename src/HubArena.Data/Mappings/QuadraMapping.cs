@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
+using System.Reflection.Emit;
 
 public class QuadraMapping : IEntityTypeConfiguration<QuadraModel>
 {
@@ -16,9 +17,9 @@ public class QuadraMapping : IEntityTypeConfiguration<QuadraModel>
             .HasColumnType("varchar(150)");
 
         // Relacionamento com Endereco 1:1
-        builder.HasOne(q => q.EnderecoQuadra)
+        builder.HasOne(q => q.Endereco)
             .WithOne(e => e.Quadra)
-            .HasForeignKey<EnderecoQuadraModel>(q => q.IdQuadra);
+            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
 
         // Relacionamento Quadra com Esporte 1:N
         builder.HasOne(q => q.Esporte)

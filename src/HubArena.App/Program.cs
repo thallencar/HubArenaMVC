@@ -29,7 +29,6 @@ namespace HubArena.App
             builder.Services.AddScoped<HubArenaDbContext>();    
             builder.Services.AddScoped<IEsporteRepository, EsporteRepository>();
             builder.Services.AddScoped<IEquipamentoRepository, EquipamentoRepository>();
-            builder.Services.AddScoped<IEnderecoFuncionarioRepository, EnderecoFuncionarioRepository>();
 
             var app = builder.Build();
 

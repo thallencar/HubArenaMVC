@@ -25,7 +25,7 @@ namespace HubArena.App.ViewModels
         public int StatusQuadra { get; set; }
 
         //1..1
-        public EnderecoQuadraViewModel EnderecoQuadra { get; set; }
+        public EnderecoViewModel Endereco { get; set; }
         //N..1
         public IEnumerable<ReservaViewModel> Reservas { get; set; }
         //1..N

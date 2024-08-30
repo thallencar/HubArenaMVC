@@ -19,8 +19,9 @@ namespace HubArena.Business.Models
         //public TipoUsuarioEnum TipoUsuario { get; set; }
 
         //1..1
-        public int IdEnderecoFuncionario { get; set; } 
-        public EnderecoFuncionarioModel EnderecoFuncionario { get; set; }
+        public int IdEndereco { get; set; } 
+        public EnderecoModel Endereco{ get; set; }
+
         //N..1
         public IEnumerable<ContatoModel> Contatos { get; set; }
 

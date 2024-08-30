@@ -49,7 +49,7 @@ namespace HubArena.App.ViewModels
         public DateTime DataRegistro { get; set; } = DateTime.UtcNow;
 
         //1..1
-        public EnderecoFuncionarioModel EnderecoFuncionario { get; set; }
+        public EnderecoViewModel Endereco { get; set; }
         //N..1
         public IEnumerable<ContatoViewModel> Contatos { get; set; }
 

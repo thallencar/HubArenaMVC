@@ -11,7 +11,8 @@ namespace HubArena.Business.Models
         public StatusQuadraEnum StatusQuadra { get; set; }
 
         //1..1
-        public EnderecoQuadraModel EnderecoQuadra { get; set; }
+        public int IdEndereco { get; set; }
+        public EnderecoModel Endereco { get; set; }
         //N..1
         public IEnumerable<ReservaModel> Reservas { get; set; }
         //1..N

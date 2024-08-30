@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HubArena.App.ViewModels
 {
-    public class EnderecoQuadraViewModel
+    public class EnderecoViewModel
     {
         [Key]
-        public int IdEnderecoQuadra { get; set; }
+        public int IdEndereco { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [RegularExpression(@"^\d{9}$ | ^\d{5}-\d{3}$", ErrorMessage = "O campo Cep deve conter 9 caracteres.")]
-        public string Cep { get; set; }
+        [RegularExpression(@"^\d{8}$|^\d{5}-\d{3}$", ErrorMessage = "O campo Cep deve conter 8 caracteres.")]
+        public string Cep { get; set; } 
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "O campo Estado deve conter 2 caracteres.")]
@@ -29,18 +29,17 @@ namespace HubArena.App.ViewModels
         public string Logradouro { get; set; }
 
         [DisplayName("Número")]
-        public int Numero { get; set; }
+        public int? Numero { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(50, ErrorMessage = "O campo Complemento deve conter entre {2} e {1} caracteres.", MinimumLength = 2)]
-        public string Complemento { get; set; }
+        public string? Complemento { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(100, ErrorMessage = "O campo Ponto de Referência deve conter entre {2} e {1} caracteres.", MinimumLength = 2)]
         [DisplayName("Ponto de Referência")]
-        public string PontoReferencia { get; set; }
+        public string? PontoReferencia { get; set; }
 
-        //1..1
-        public int IdQuadra { get; set; }
+        [DisplayName("Tipo de Endereço")]
+        public int TipoEndereco { get; set; }
+
     }
 }

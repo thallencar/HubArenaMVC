@@ -9,8 +9,7 @@ namespace HubArena.Data.Contexts
 
         
         public DbSet<ContatoModel> Contatos { get; set; }
-        public DbSet<EnderecoFuncionarioModel> EnderecoFuncionarios { get; set; }
-        public DbSet<EnderecoQuadraModel> EnderecoQuadras { get; set; }
+        public DbSet<EnderecoModel> Enderecos { get; set; }
         public DbSet<EquipamentoModel> Equipamentos { get; set; }
         public DbSet<EsporteModel> Esportes { get; set; }
         public DbSet<FuncionarioModel> Funcionarios { get; set; }
