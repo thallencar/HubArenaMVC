@@ -1,47 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HubArena.App.Data;
+﻿using AutoMapper;
 using HubArena.App.ViewModels;
+using HubArena.Business.Interfaces;
+using HubArena.Business.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HubArena.App.Controllers
 {
     public class FuncionariosController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly IEnderecoRepository _enderecoRepository;
+        private readonly IMapper _mapper;
 
-        public FuncionariosController(ApplicationDbContext context)
+        public FuncionariosController(IFuncionarioRepository funcionarioRepository, IEnderecoRepository enderecoRepository, IMapper mapper)
         {
-            _context = context;
+            _funcionarioRepository = funcionarioRepository;
+            _enderecoRepository = enderecoRepository;
+            _mapper = mapper;
         }
 
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.FuncionarioViewModel.ToListAsync());
+            return View(_mapper.Map<IEnumerable<FuncionarioViewModel>>(await _funcionarioRepository.GetAll()));
         }
 
         // GET: Funcionarios/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var funcionarioViewModel = await ObterFuncionario(id);
 
-            var funcionarioViewModel = await _context.FuncionarioViewModel
-                .FirstOrDefaultAsync(m => m.IdFuncionario == id);
-            if (funcionarioViewModel == null)
-            {
-                return NotFound();
-            }
+            if (funcionarioViewModel == null) return NotFound();
 
             return View(funcionarioViewModel);
         }
+
+       
 
         // GET: Funcionarios/Create
         public IActionResult Create()
@@ -54,30 +48,22 @@ namespace HubArena.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdFuncionario,Nome,Cargo,Documento,DataNascimento,Sexo,Email,Usuario,Senha,StatusPessoa")] FuncionarioViewModel funcionarioViewModel)
+        public async Task<IActionResult> Create(FuncionarioViewModel funcionarioViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(funcionarioViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(funcionarioViewModel);
+            if (!ModelState.IsValid) return View(funcionarioViewModel);
+
+            await _funcionarioRepository.Add(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
+
+            return RedirectToAction("Index");
         }
 
         // GET: Funcionarios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var funcionarioViewModel = await ObterFuncionario(id);
 
-            var funcionarioViewModel = await _context.FuncionarioViewModel.FindAsync(id);
-            if (funcionarioViewModel == null)
-            {
-                return NotFound();
-            }
+            if (funcionarioViewModel == null) return NotFound();
+
             return View(funcionarioViewModel);
         }
 
@@ -86,50 +72,25 @@ namespace HubArena.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdFuncionario,Nome,Cargo,Documento,DataNascimento,Sexo,Email,Usuario,Senha,StatusPessoa")] FuncionarioViewModel funcionarioViewModel)
+        public async Task<IActionResult> Edit(int id, FuncionarioViewModel funcionarioViewModel)
         {
-            if (id != funcionarioViewModel.IdFuncionario)
-            {
-                return NotFound();
-            }
+            if (id != funcionarioViewModel.IdFuncionario) return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(funcionarioViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FuncionarioViewModelExists(funcionarioViewModel.IdFuncionario))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(funcionarioViewModel);
+            if (!ModelState.IsValid) return View(funcionarioViewModel);
+
+            var funcionario = _mapper.Map<FuncionarioModel>(funcionarioViewModel);
+
+            await _funcionarioRepository.Update(funcionario);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Funcionarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var funcionarioViewModel = ObterFuncionario(id);
 
-            var funcionarioViewModel = await _context.FuncionarioViewModel
-                .FirstOrDefaultAsync(m => m.IdFuncionario == id);
-            if (funcionarioViewModel == null)
-            {
-                return NotFound();
-            }
+            if (funcionarioViewModel == null) return NotFound();
 
             return View(funcionarioViewModel);
         }
@@ -139,19 +100,18 @@ namespace HubArena.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionarioViewModel = await _context.FuncionarioViewModel.FindAsync(id);
-            if (funcionarioViewModel != null)
-            {
-                _context.FuncionarioViewModel.Remove(funcionarioViewModel);
-            }
+            var funcionarioViewModel = await ObterFuncionario(id);
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (funcionarioViewModel == null) return NotFound();
+
+            await _funcionarioRepository.Delete(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
+     
+            return RedirectToAction("Index");
         }
 
-        private bool FuncionarioViewModelExists(int id)
+        private async Task<FuncionarioViewModel> ObterFuncionario(int id)
         {
-            return _context.FuncionarioViewModel.Any(e => e.IdFuncionario == id);
+            return _mapper.Map<FuncionarioViewModel>(await _funcionarioRepository.ObterFuncionario(id));
         }
     }
 }
