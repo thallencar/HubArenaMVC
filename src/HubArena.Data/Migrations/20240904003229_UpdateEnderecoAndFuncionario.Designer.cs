@@ -4,6 +4,7 @@ using HubArena.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    partial class HubArenaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240904003229_UpdateEnderecoAndFuncionario")]
+    partial class UpdateEnderecoAndFuncionario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,13 +123,15 @@ namespace HubArena.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
                     b.Property<int>("StatusEquipamento")
                         .HasColumnType("int");
 
                     b.HasKey("IdEquipamento");
 
-                    b.HasIndex("IdEsporte")
-                        .IsUnique();
+                    b.HasIndex("IdEsporte");
 
                     b.ToTable("TB_EQUIPAMENTO", (string)null);
                 });
@@ -321,8 +326,8 @@ namespace HubArena.Data.Migrations
             modelBuilder.Entity("HubArena.Business.Models.EquipamentoModel", b =>
                 {
                     b.HasOne("HubArena.Business.Models.EsporteModel", "Esporte")
-                        .WithOne("Equipamento")
-                        .HasForeignKey("HubArena.Business.Models.EquipamentoModel", "IdEsporte")
+                        .WithMany("Equipamentos")
+                        .HasForeignKey("IdEsporte")
                         .IsRequired();
 
                     b.Navigation("Esporte");
@@ -391,7 +396,7 @@ namespace HubArena.Data.Migrations
 
             modelBuilder.Entity("HubArena.Business.Models.EsporteModel", b =>
                 {
-                    b.Navigation("Equipamento");
+                    b.Navigation("Equipamentos");
 
                     b.Navigation("Quadras");
                 });

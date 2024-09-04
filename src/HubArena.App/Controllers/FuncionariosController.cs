@@ -9,13 +9,11 @@ namespace HubArena.App.Controllers
     public class FuncionariosController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
-        private readonly IEnderecoRepository _enderecoRepository;
         private readonly IMapper _mapper;
 
-        public FuncionariosController(IFuncionarioRepository funcionarioRepository, IEnderecoRepository enderecoRepository, IMapper mapper)
+        public FuncionariosController(IFuncionarioRepository funcionarioRepository, IMapper mapper)
         {
             _funcionarioRepository = funcionarioRepository;
-            _enderecoRepository = enderecoRepository;
             _mapper = mapper;
         }
 
@@ -28,14 +26,14 @@ namespace HubArena.App.Controllers
         // GET: Funcionarios/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var funcionarioViewModel = await ObterFuncionario(id);
+            var funcionarioViewModel = await ObterFuncionarioEndereco(id);
 
             if (funcionarioViewModel == null) return NotFound();
 
             return View(funcionarioViewModel);
         }
 
-       
+
 
         // GET: Funcionarios/Create
         public IActionResult Create()
@@ -52,7 +50,9 @@ namespace HubArena.App.Controllers
         {
             if (!ModelState.IsValid) return View(funcionarioViewModel);
 
-            await _funcionarioRepository.Add(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
+            var funcionario = _mapper.Map<FuncionarioModel>(funcionarioViewModel);
+
+            await _funcionarioRepository.Add(funcionario);
 
             return RedirectToAction("Index");
         }
@@ -60,7 +60,7 @@ namespace HubArena.App.Controllers
         // GET: Funcionarios/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var funcionarioViewModel = await ObterFuncionario(id);
+            var funcionarioViewModel = await ObterFuncionarioEndereco(id);
 
             if (funcionarioViewModel == null) return NotFound();
 
@@ -88,7 +88,7 @@ namespace HubArena.App.Controllers
         // GET: Funcionarios/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var funcionarioViewModel = ObterFuncionario(id);
+            var funcionarioViewModel = await ObterFuncionarioEndereco(id);
 
             if (funcionarioViewModel == null) return NotFound();
 
@@ -100,18 +100,17 @@ namespace HubArena.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionarioViewModel = await ObterFuncionario(id);
+            var funcionarioViewModel = await ObterFuncionarioEndereco(id);
 
             if (funcionarioViewModel == null) return NotFound();
 
             await _funcionarioRepository.Delete(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
-     
             return RedirectToAction("Index");
         }
 
-        private async Task<FuncionarioViewModel> ObterFuncionario(int id)
+        private async Task<FuncionarioViewModel> ObterFuncionarioEndereco(int id)
         {
-            return _mapper.Map<FuncionarioViewModel>(await _funcionarioRepository.ObterFuncionario(id));
+            return _mapper.Map<FuncionarioViewModel>(await _funcionarioRepository.ObterFuncionarioEndereco(id));
         }
     }
 }

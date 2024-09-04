@@ -14,5 +14,9 @@ namespace HubArena.Data.Repositories
             return await Db.Funcionarios.AsNoTracking().FirstOrDefaultAsync(f => f.IdFuncionario == id);    
         }
 
+        public async Task<FuncionarioModel> ObterFuncionarioEndereco(int id)
+        {
+            return await Db.Funcionarios.AsNoTracking().Include(f => f.Endereco).FirstOrDefaultAsync(f => f.IdFuncionario == id);
+        }
     }
 }

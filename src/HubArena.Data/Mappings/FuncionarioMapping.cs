@@ -33,18 +33,18 @@ namespace HubArena.Data.Mappings
             builder.Property(f => f.Documento)
                 .IsRequired()
                 .HasColumnType("varchar(11)");
-            
+
             builder.Property(f => f.Email)
                 .IsRequired()
                 .HasColumnType("varchar(60)");
 
             builder.Property(f => f.Sexo)
-                .HasColumnType("varchar(10)");           
+                .HasColumnType("varchar(10)");
 
             // Relacionamento com Endereco 1:1
             builder.HasOne(f => f.Endereco)
                 .WithOne(e => e.Funcionario)
-                .HasForeignKey<FuncionarioModel>(f => f.IdEndereco);
+                .HasForeignKey<EnderecoModel>(e => e.IdFuncionario);
 
             // Relacionamento com Contato 1:N
             builder.HasMany(f => f.Contatos)
