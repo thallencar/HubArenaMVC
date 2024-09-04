@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<HubArena.App.ViewModels.EquipamentoViewModel>
 
-@{
-	ViewData["Title"] = "Index";
-}
+<link rel="stylesheet" href="~/css/tabelas.css" asp-append-version="true" />
 
 <h1>Index</h1>
 
@@ -14,9 +12,6 @@
 		<tr>
 			<th>
 				@Html.DisplayNameFor(model => model.Nome)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Quantidade)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.StatusEquipamento)
@@ -33,9 +28,6 @@
 			<tr>
 				<td>
 					@Html.DisplayFor(modelItem => item.Nome)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Quantidade)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.StatusEquipamento)
