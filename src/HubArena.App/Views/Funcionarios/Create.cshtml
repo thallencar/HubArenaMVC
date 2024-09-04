@@ -1,8 +1,8 @@
 ﻿@model HubArena.App.ViewModels.FuncionarioViewModel
+@using HubArena.Business.Enums
 
-@{
-    ViewData["Title"] = "Create";
-}
+<link rel="stylesheet" href="~/css/cadastro.css" asp-append-version="true" />
+
 
 <h1>Create</h1>
 
@@ -29,12 +29,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
+                <input asp-for="DataNascimento" class="form-control" type="date" />
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
+                <select asp-for="Sexo" class="form-control form-select">
+                    <option selected disabled>Selecione o sexo</option>
+                    <option>Feminino</option>
+                    <option>Masculino</option>
+                    <option>Outros</option>
+                </select>
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,23 +50,28 @@
             <div class="form-group">
                 <label asp-for="Usuario" class="control-label"></label>
                 <input asp-for="Usuario" class="form-control" />
-                <span asp-validation-for="Usuario" class="text-danger"></span>
+                <span asp-validation-for="Usuario" class="text-danger"></span> 
             </div>
             <div class="form-group">
                 <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="Senha" class="form-control" />
+                <input asp-for="Senha" class="form-control" type="password" />
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StatusPessoa" class="control-label"></label>
-                <input asp-for="StatusPessoa" class="form-control" />
+                <label asp-for="StatusPessoa"></label>
+                <select asp-for="StatusPessoa" class="form-control form-select"
+                        asp-items="@Html.GetEnumSelectList<StatusPessoaEnum>()">
+                    <option value="" selected disabled>Selecione o status</option>
+                </select>
                 <span asp-validation-for="StatusPessoa" class="text-danger"></span>
             </div>
-            <partial name="_EnderecoPartials"></partial>
+            <h4 class="mt-3">Endereço</h4>
+            <hr />
+            <partial name="_Endereco"></partial>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-            
+
 
         </form>
 
@@ -73,5 +83,11 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        BuscarCep();
+    </script>
 }
