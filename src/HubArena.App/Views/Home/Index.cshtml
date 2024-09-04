@@ -1,7 +1,4 @@
-﻿
-
-
-<main>
+﻿<main>
     <figure class="logo-imagem">
         <img src="~/img/Logo.svg" alt="" />
     </figure>
@@ -11,5 +8,5 @@
     </div>
     <span class="texto-slogan">Alugue. Jogue. Conquiste.</span>
     <a class="btn-entrar" asp-area="Identity" asp-page="/Account/Login"> ENTRAR </a>
-    <a class="texto-criar-conta" asp-area="Identity" asp-page="/Account/Register">Ainda não possuo uma conta</a>
+    <a class="texto-criar-conta" asp-controller="Funcionarios" asp-action="Create">Ainda não possuo uma conta</a>
 </main>

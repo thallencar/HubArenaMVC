@@ -1,0 +1,95 @@
+﻿body,
+html {
+    overflow: auto;
+}
+
+.barra-progresso {
+    width: 85%;
+    height: 10px;
+    margin: 0 auto 25px;
+}
+
+
+progress {
+    -webkit-appearance: none;
+}
+
+    progress::-webkit-progress-bar {
+        background-color: var(--textos);
+        border-radius: 20px;
+    }
+
+
+::-webkit-progress-value {
+    background-color: var(--cor-primaria);
+    border-radius: 10px;
+}
+
+
+.texto-cadastro {
+    text-align: center;
+    font: 600 40px var(--fonte-secundaria);
+    margin: 15px 0 5px;
+}
+
+.section-info {
+    font: 500 19px var(--fonte-secundaria);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container-form {
+    margin-top: 15px;
+}
+
+select {
+    font: 500 19px var(--fonte-primaria);
+    padding: 14px;
+    border: 3px solid var(--cor-terciaria);
+    border-radius: 8px;
+}
+
+option {
+    font: 500 13px var(--fonte-primaria);
+    border-radius: 8px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 45px 0;
+    width: 80%;
+}
+
+.proxima-secao,
+.voltar-secao {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 80%;
+}
+
+    .proxima-secao a,
+    .voltar-secao a {
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .proxima-secao img {
+        width: 13px;
+    }
+
+    .voltar-secao a {
+        margin-right: auto;
+    }
+
+    .voltar-secao img {
+        width: 13px;
+        transform: rotate(180deg);
+    }
+
+.btn-form {
+    margin: 45px 0 10px;
+}
