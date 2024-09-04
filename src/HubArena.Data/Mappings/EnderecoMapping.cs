@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HubArena.Business.Models;
+using HubArena.Business.Enums;
 
 public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 {
@@ -17,7 +18,7 @@ public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 
         builder.Property(e => e.Estado)
             .IsRequired()
-            .HasColumnType("varchar(2)");
+            .HasColumnType("varchar(30)");
 
         builder.Property(e => e.Cidade)
             .IsRequired()
@@ -36,6 +37,14 @@ public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
 
         builder.Property(e => e.PontoReferencia)
             .HasColumnType("varchar(100)");
+
+        builder.Property(e => e.TipoEndereco)
+           .HasColumnType("varchar(10)");
+
+
+        builder.HasOne(e => e.Funcionario)
+               .WithOne(f => f.Endereco)
+               .HasForeignKey<EnderecoModel>(e => e.IdFuncionario);
 
 
         builder.ToTable("TB_ENDERECO");

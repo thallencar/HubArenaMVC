@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HubArena.App.ViewModels
@@ -9,11 +10,11 @@ namespace HubArena.App.ViewModels
         public int IdEndereco { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [RegularExpression(@"^\d{8}$|^\d{5}-\d{3}$", ErrorMessage = "O campo Cep deve conter 8 caracteres.")]
-        public string Cep { get; set; } 
+        [StringLength(8, ErrorMessage = "O campo Cep deve conter {1} caracteres.", MinimumLength = 8)]
+        public string Cep { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [RegularExpression(@"^[A-Z]{2}$", ErrorMessage = "O campo Estado deve conter 2 caracteres.")]
+        [StringLength(2, ErrorMessage = "O campo Estado deve conter {1} caracteres.", MinimumLength = 2)]
         public string Estado { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
@@ -40,6 +41,9 @@ namespace HubArena.App.ViewModels
 
         [DisplayName("Tipo de Endereço")]
         public int TipoEndereco { get; set; }
+
+        [HiddenInput]
+        public int IdFuncionario { get; set; }
 
     }
 }

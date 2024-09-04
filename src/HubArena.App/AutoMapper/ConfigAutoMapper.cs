@@ -9,6 +9,7 @@ namespace HubArena.App.AutoMapper
         public ConfigAutoMapper()
         {
             CreateMap<ContatoModel, ContatoViewModel>().ReverseMap();
+            CreateMap<EnderecoModel, EnderecoViewModel>().ReverseMap();
             CreateMap<EquipamentoModel, EquipamentoViewModel>().ReverseMap();
             CreateMap<EsporteModel, EsporteViewModel>().ReverseMap();
             CreateMap<FuncionarioModel, FuncionarioViewModel>().ReverseMap();
