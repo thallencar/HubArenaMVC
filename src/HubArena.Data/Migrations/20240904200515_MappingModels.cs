@@ -12,18 +12,16 @@ namespace HubArena.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TB_EQUIPAMENTO",
+                name: "TB_ESPORTE",
                 columns: table => new
                 {
-                    IdEquipamento = table.Column<int>(type: "int", nullable: false)
+                    IdEsporte = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    StatusEquipamento = table.Column<int>(type: "int", nullable: false)
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_EQUIPAMENTO", x => x.IdEquipamento);
+                    table.PrimaryKey("PK_TB_ESPORTE", x => x.IdEsporte);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,7 +39,8 @@ namespace HubArena.Data.Migrations
                     Usuario = table.Column<string>(type: "varchar(30)", nullable: false),
                     Senha = table.Column<string>(type: "varchar(16)", nullable: false),
                     StatusPessoa = table.Column<int>(type: "int", nullable: false),
-                    DataRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEndereco = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,23 +48,23 @@ namespace HubArena.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_ESPORTE",
+                name: "TB_EQUIPAMENTO",
                 columns: table => new
                 {
-                    IdEsporte = table.Column<int>(type: "int", nullable: false)
+                    IdEquipamento = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(500)", nullable: true),
-                    IdEquipamento = table.Column<int>(type: "int", nullable: false)
+                    StatusEquipamento = table.Column<int>(type: "int", nullable: false),
+                    IdEsporte = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_ESPORTE", x => x.IdEsporte);
+                    table.PrimaryKey("PK_TB_EQUIPAMENTO", x => x.IdEquipamento);
                     table.ForeignKey(
-                        name: "FK_TB_ESPORTE_TB_EQUIPAMENTO_IdEquipamento",
-                        column: x => x.IdEquipamento,
-                        principalTable: "TB_EQUIPAMENTO",
-                        principalColumn: "IdEquipamento");
+                        name: "FK_TB_EQUIPAMENTO_TB_ESPORTE_IdEsporte",
+                        column: x => x.IdEsporte,
+                        principalTable: "TB_ESPORTE",
+                        principalColumn: "IdEsporte");
                 });
 
             migrationBuilder.CreateTable(
@@ -91,26 +90,27 @@ namespace HubArena.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_ENDERECO_FUNCIONARIO",
+                name: "TB_ENDERECO",
                 columns: table => new
                 {
-                    IdEnderecoFuncionario = table.Column<int>(type: "int", nullable: false)
+                    IdEndereco = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdFuncionario = table.Column<int>(type: "int", nullable: false),
                     Cep = table.Column<string>(type: "varchar(10)", nullable: false),
-                    Estado = table.Column<string>(type: "varchar(2)", nullable: false),
+                    Estado = table.Column<string>(type: "varchar(30)", nullable: false),
                     Cidade = table.Column<string>(type: "varchar(50)", nullable: false),
                     Bairro = table.Column<string>(type: "varchar(50)", nullable: false),
                     Logradouro = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: true),
                     Complemento = table.Column<string>(type: "varchar(50)", nullable: true),
-                    PontoReferencia = table.Column<string>(type: "varchar(100)", nullable: true)
+                    PontoReferencia = table.Column<string>(type: "varchar(100)", nullable: true),
+                    TipoEndereco = table.Column<string>(type: "varchar(10)", nullable: false),
+                    IdFuncionario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_ENDERECO_FUNCIONARIO", x => x.IdEnderecoFuncionario);
+                    table.PrimaryKey("PK_TB_ENDERECO", x => x.IdEndereco);
                     table.ForeignKey(
-                        name: "FK_TB_ENDERECO_FUNCIONARIO_TB_FUNCIONARIO_IdFuncionario",
+                        name: "FK_TB_ENDERECO_TB_FUNCIONARIO_IdFuncionario",
                         column: x => x.IdFuncionario,
                         principalTable: "TB_FUNCIONARIO",
                         principalColumn: "IdFuncionario");
@@ -126,42 +126,22 @@ namespace HubArena.Data.Migrations
                     Capacidade = table.Column<int>(type: "int", nullable: false),
                     TipoQuadra = table.Column<int>(type: "int", nullable: false),
                     StatusQuadra = table.Column<int>(type: "int", nullable: false),
+                    IdEndereco = table.Column<int>(type: "int", nullable: false),
                     IdEsporte = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_QUADRA", x => x.IdQuadra);
                     table.ForeignKey(
+                        name: "FK_TB_QUADRA_TB_ENDERECO_IdEndereco",
+                        column: x => x.IdEndereco,
+                        principalTable: "TB_ENDERECO",
+                        principalColumn: "IdEndereco");
+                    table.ForeignKey(
                         name: "FK_TB_QUADRA_TB_ESPORTE_IdEsporte",
                         column: x => x.IdEsporte,
                         principalTable: "TB_ESPORTE",
                         principalColumn: "IdEsporte");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TB_ENDERECO_QUADRA",
-                columns: table => new
-                {
-                    IdEnderecoQuadra = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdQuadra = table.Column<int>(type: "int", nullable: false),
-                    Cep = table.Column<string>(type: "varchar(10)", nullable: false),
-                    Estado = table.Column<string>(type: "varchar(2)", nullable: false),
-                    Cidade = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Bairro = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Logradouro = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Numero = table.Column<int>(type: "int", nullable: false),
-                    Complemento = table.Column<string>(type: "varchar(50)", nullable: true),
-                    PontoReferencia = table.Column<string>(type: "varchar(100)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TB_ENDERECO_QUADRA", x => x.IdEnderecoQuadra);
-                    table.ForeignKey(
-                        name: "FK_TB_ENDERECO_QUADRA_TB_QUADRA_IdQuadra",
-                        column: x => x.IdQuadra,
-                        principalTable: "TB_QUADRA",
-                        principalColumn: "IdQuadra");
                 });
 
             migrationBuilder.CreateTable(
@@ -223,21 +203,21 @@ namespace HubArena.Data.Migrations
                 column: "IdFuncionario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_ENDERECO_FUNCIONARIO_IdFuncionario",
-                table: "TB_ENDERECO_FUNCIONARIO",
+                name: "IX_TB_ENDERECO_IdFuncionario",
+                table: "TB_ENDERECO",
                 column: "IdFuncionario",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_ENDERECO_QUADRA_IdQuadra",
-                table: "TB_ENDERECO_QUADRA",
-                column: "IdQuadra",
-                unique: true);
+                name: "IX_TB_EQUIPAMENTO_IdEsporte",
+                table: "TB_EQUIPAMENTO",
+                column: "IdEsporte");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_ESPORTE_IdEquipamento",
-                table: "TB_ESPORTE",
-                column: "IdEquipamento");
+                name: "IX_TB_QUADRA_IdEndereco",
+                table: "TB_QUADRA",
+                column: "IdEndereco",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_QUADRA_IdEsporte",
@@ -272,28 +252,25 @@ namespace HubArena.Data.Migrations
                 name: "TB_CONTATO");
 
             migrationBuilder.DropTable(
-                name: "TB_ENDERECO_FUNCIONARIO");
-
-            migrationBuilder.DropTable(
-                name: "TB_ENDERECO_QUADRA");
-
-            migrationBuilder.DropTable(
                 name: "TB_RESERVA_EQUIPAMENTO");
+
+            migrationBuilder.DropTable(
+                name: "TB_EQUIPAMENTO");
 
             migrationBuilder.DropTable(
                 name: "TB_RESERVA");
 
             migrationBuilder.DropTable(
-                name: "TB_FUNCIONARIO");
+                name: "TB_QUADRA");
 
             migrationBuilder.DropTable(
-                name: "TB_QUADRA");
+                name: "TB_ENDERECO");
 
             migrationBuilder.DropTable(
                 name: "TB_ESPORTE");
 
             migrationBuilder.DropTable(
-                name: "TB_EQUIPAMENTO");
+                name: "TB_FUNCIONARIO");
         }
     }
 }

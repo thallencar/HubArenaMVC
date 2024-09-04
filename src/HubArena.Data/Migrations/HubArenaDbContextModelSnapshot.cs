@@ -125,8 +125,7 @@ namespace HubArena.Data.Migrations
 
                     b.HasKey("IdEquipamento");
 
-                    b.HasIndex("IdEsporte")
-                        .IsUnique();
+                    b.HasIndex("IdEsporte");
 
                     b.ToTable("TB_EQUIPAMENTO", (string)null);
                 });
@@ -321,8 +320,8 @@ namespace HubArena.Data.Migrations
             modelBuilder.Entity("HubArena.Business.Models.EquipamentoModel", b =>
                 {
                     b.HasOne("HubArena.Business.Models.EsporteModel", "Esporte")
-                        .WithOne("Equipamento")
-                        .HasForeignKey("HubArena.Business.Models.EquipamentoModel", "IdEsporte")
+                        .WithMany("Equipamentos")
+                        .HasForeignKey("IdEsporte")
                         .IsRequired();
 
                     b.Navigation("Esporte");
@@ -391,7 +390,7 @@ namespace HubArena.Data.Migrations
 
             modelBuilder.Entity("HubArena.Business.Models.EsporteModel", b =>
                 {
-                    b.Navigation("Equipamento");
+                    b.Navigation("Equipamentos");
 
                     b.Navigation("Quadras");
                 });

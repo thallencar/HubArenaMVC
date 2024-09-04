@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    [Migration("20240904003229_UpdateEnderecoAndFuncionario")]
-    partial class UpdateEnderecoAndFuncionario
+    [Migration("20240904200515_MappingModels")]
+    partial class MappingModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,9 +122,6 @@ namespace HubArena.Data.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
 
                     b.Property<int>("StatusEquipamento")
                         .HasColumnType("int");
