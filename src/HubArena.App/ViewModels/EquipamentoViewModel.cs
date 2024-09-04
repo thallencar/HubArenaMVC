@@ -7,15 +7,12 @@ namespace HubArena.App.ViewModels
     public class EquipamentoViewModel
     {
         [Key]
+        [DisplayName("Código")]
         public int IdEquipamento { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(100, ErrorMessage = "O campo Nome deve conter entre {2} e {1} caracteres.", MinimumLength = 2)]
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        [Range(1, 100, ErrorMessage = "O campo Quantidade deve conter entre {1} e {2} caracteres.")]
-        public int Quantidade { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [DisplayName("Status"), Range(0,5, ErrorMessage = "O campo Status deve conter entre {1} e {2} caracteres.")] 

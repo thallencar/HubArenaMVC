@@ -60,7 +60,7 @@ namespace HubArena.App.Controllers
         // GET: Equipamentos/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var equipamentoViewModel = ObterEquipamento(id);
+            var equipamentoViewModel = await ObterEquipamento(id);
 
             if (equipamentoViewModel == null) return NotFound();
 
@@ -83,7 +83,6 @@ namespace HubArena.App.Controllers
             if (! ModelState.IsValid) return View(equipamentoViewModel);
 
             equipamentoAtualizacao.Nome = equipamentoViewModel.Nome;
-            equipamentoAtualizacao.Quantidade = equipamentoViewModel.Quantidade;
             equipamentoAtualizacao.StatusEquipamento = equipamentoViewModel.StatusEquipamento;
 
             await _equipamentoRepository.Update(_mapper.Map<EquipamentoModel>(equipamentoAtualizacao));

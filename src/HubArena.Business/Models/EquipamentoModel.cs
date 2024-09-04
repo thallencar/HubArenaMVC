@@ -6,7 +6,6 @@ namespace HubArena.Business.Models
     {
         public int IdEquipamento { get; set; }
         public string Nome { get; set; }
-        public int Quantidade { get; set; }
         public StatusEquipamentoEnum StatusEquipamento { get; set; }
 
         //1..N
