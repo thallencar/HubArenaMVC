@@ -1,23 +1,21 @@
 ﻿@model IEnumerable<HubArena.App.ViewModels.EsporteViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<link rel="stylesheet" href="~/css/tabelas.css" asp-append-version="true" />
 
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+<div class="container-create">
+    <a href="../quadras.html">
+        <img src="/assets/img/Arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">QUADRAS</h1>
+</div>
+<h2 class="subtitulo">Dados</h2>
+
+<table class="table container-infos">
     <tbody>
 @foreach (var item in Model) {
         <tr>
