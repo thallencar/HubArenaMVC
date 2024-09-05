@@ -30,6 +30,7 @@ namespace HubArena.App
             builder.Services.AddScoped<IEsporteRepository, EsporteRepository>();
             builder.Services.AddScoped<IEquipamentoRepository, EquipamentoRepository>();
             builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            builder.Services.AddScoped<IQuadraRepository, QuadraRepository>();
 
             var app = builder.Build();
 
