@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    [Migration("20240904200515_MappingModels")]
+    [Migration("20240905175230_MappingModels")]
     partial class MappingModels
     {
         /// <inheritdoc />

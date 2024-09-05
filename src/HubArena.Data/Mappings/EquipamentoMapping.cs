@@ -15,7 +15,6 @@ public class EquipamentoMapping : IEntityTypeConfiguration<EquipamentoModel>
             .IsRequired()
             .HasColumnType("varchar(100)");
 
-
         // Relacionamento com Esporte 1:N
         builder.HasOne(eq => eq.Esporte)
             .WithMany(e => e.Equipamentos)
