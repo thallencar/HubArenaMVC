@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HubArena.App.ViewModels.ReservaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioFim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdQuadra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFuncionario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorarioInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorarioFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusReserva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdQuadra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFuncionario)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdReserva">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdReserva">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdReserva">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
