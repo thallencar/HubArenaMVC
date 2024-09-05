@@ -78,6 +78,8 @@ namespace HubArena.App.Controllers
 
             var equipamentoAtualizacao = await ObterEquipamento(id);
 
+            equipamentoAtualizacao = await PopularEsportes(equipamentoViewModel);
+
             equipamentoViewModel.Esporte = equipamentoAtualizacao.Esporte;
 
             if (! ModelState.IsValid) return View(equipamentoViewModel);
@@ -88,7 +90,6 @@ namespace HubArena.App.Controllers
             await _equipamentoRepository.Update(_mapper.Map<EquipamentoModel>(equipamentoAtualizacao));
 
             return RedirectToAction("Index");
-            
         }
 
         // GET: Equipamentos/Delete/5

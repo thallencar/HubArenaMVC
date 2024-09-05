@@ -7,7 +7,6 @@ namespace HubArena.App.ViewModels
     public class EquipamentoViewModel
     {
         [Key]
-        [DisplayName("Código")]
         public int IdEquipamento { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
