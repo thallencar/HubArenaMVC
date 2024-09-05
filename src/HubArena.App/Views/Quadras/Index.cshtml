@@ -1,0 +1,59 @@
+﻿@model IEnumerable<HubArena.App.ViewModels.QuadraViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoQuadra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusQuadra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEsporte)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoQuadra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusQuadra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEsporte)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdQuadra">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdQuadra">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdQuadra">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

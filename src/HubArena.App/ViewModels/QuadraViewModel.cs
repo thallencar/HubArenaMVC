@@ -24,11 +24,17 @@ namespace HubArena.App.ViewModels
         [DisplayName("Status")]
         public int StatusQuadra { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório.")]
+        [DisplayName("Esporte")]
+        //1..N
+        public int IdEsporte { get; set; }
+        public EsporteViewModel Esporte { get; set; }
+
         //1..1
         public EnderecoViewModel Endereco { get; set; }
         //N..1
         public IEnumerable<ReservaViewModel> Reservas { get; set; }
-        //1..N
-        public int IdEsporte { get; set; }
+        
+        public IEnumerable<EsporteViewModel> Esportes { get; set; }
     }
 }
