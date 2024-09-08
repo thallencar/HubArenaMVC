@@ -1,33 +1,32 @@
 ﻿@model IEnumerable<HubArena.App.ViewModels.EsporteViewModel>
 
 <link rel="stylesheet" href="~/css/tabelas.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
-<h1>Index</h1>
+<partial name="_HeaderLogo"></partial>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1 class="titulo">ESPORTES</h1>
 <div class="container-create">
-    <a href="../quadras.html">
-        <img src="/assets/img/Arrow.svg" alt="">
+    <a asp-action="Create" class="subtitulo">
+        <img src="~/img/plus.svg" alt="">
+        Adicionar novo esporte
     </a>
-    <h1 class="titulo">QUADRAS</h1>
 </div>
-<h2 class="subtitulo">Dados</h2>
 
-<table class="table container-infos">
+<table>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdEsporte">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdEsporte">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdEsporte">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td class="td-view">
+                    <a asp-action="Details" asp-route-id="@item.IdEsporte">
+                        <img src="~/img/view.svg" alt="View" />
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

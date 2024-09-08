@@ -1,0 +1,128 @@
+﻿.container-info {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.container-info img {
+    width: 17px;
+    transform: rotate(180deg);
+}
+
+.titulo {
+    font-size: 33px;
+    margin: 0 10px;
+}
+
+.subtitulo {
+    font-size: 25px;
+    margin: 5px 30px 10px;
+}
+
+.container-dados {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+dl {
+    margin-top: 10px;
+}
+
+dt {
+    font: 500 30px var(--fonte-primaria);
+}
+
+dd {
+    font: 300 22px var(--fonte-secundaria);
+}
+
+.componente-editar {
+    display: flex;
+    justify-content: center;
+    background-color: var(--cor-secundaria);
+    border-radius: 4px;
+    width: 11%;
+    margin: 6px 13px 10px;
+    padding: 6px;
+}
+
+.componente-editar img {
+    width: 25px;
+    margin-bottom: 2px;
+}
+
+.componente-apagar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    width: 90%;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.componente-apagar span{
+    font: 400 27px var(--fonte-primaria);
+    margin-right: 13px;
+}
+
+.componente-apagar img {
+    border: 3px solid var(--cor-secundaria);
+    border-radius: 4px;
+    width: 50px;
+    padding: 10px;
+}
+
+
+@media (min-width: 1024px) {
+    .container-info {
+        margin-top: 10px;
+        margin-left: 75px;
+    }
+
+    .container-info img {
+       width: 20px;
+    }
+
+    .titulo {
+        font-size: 37px;
+    }
+
+    .subtitulo {
+        font-size: 27px;
+        margin-left: 75px;
+    }
+
+    .container-dados {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        margin-left: 80px;
+    }
+
+    dl {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .componente-editar {
+        
+        width: 3%;
+        margin-top: 8px;
+        padding: 7px;
+    }
+
+    .componente-editar img {
+        width: 25px;
+    }
+
+    .componente-apagar {
+        position: fixed; 
+        bottom: 20px;
+        width: 95%;
+    }
+}

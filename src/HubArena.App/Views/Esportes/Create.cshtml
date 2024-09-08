@@ -1,13 +1,17 @@
 ﻿@model HubArena.App.ViewModels.EsporteViewModel
 
-@{
-    ViewData["Title"] = "Create";
-}
+<link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
 
-<h1>Create</h1>
+<partial name="_HeaderLogo"></partial>
 
-<h4>EsporteViewModel</h4>
-<hr />
+<div class="container-info">
+    <a asp-action="Index">
+        <img src="~/img/arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">ESPORTES</h1>
+</div>
+<h2 class="subtitulo">Cadastro</h2>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -18,15 +22,12 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="CADASTRAR" class="btn-form-cadastrar" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

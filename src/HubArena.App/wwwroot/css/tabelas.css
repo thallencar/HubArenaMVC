@@ -1,15 +1,34 @@
-﻿.table {
-    --bs-table-bg: transparent;
-    --bs-table-accent-bg: transparent;
-    --bs-table-striped-color: #212529;
-    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-    --bs-table-active-color: #212529;
-    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-    --bs-table-hover-color: #212529;
-    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-    width: 80%;
-    margin-bottom: 1rem;
-    color: var(--textos);
+﻿table {
+    font: 400 17px var(--fonte-secundaria);
     vertical-align: top;
-    border-color: #dee2e6;
+    border: 3px solid var(--cor-primaria);
+    border-radius: 3px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+th, tr, td {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+tr {
+    border-bottom: 3px solid var(--cor-primaria);
+    padding: 14px;
+}
+
+tr:last-child {
+    border: none;
+}
+
+td {
+    margin: 7px 0;
+}
+
+@media (min-width: 1024px) {
+    table {
+        font: 400 20px var(--fonte-secundaria);
+    }
 }
