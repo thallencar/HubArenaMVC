@@ -62,6 +62,8 @@ namespace HubArena.App.Controllers
         {
             var equipamentoViewModel = await ObterEquipamento(id);
 
+            equipamentoViewModel = await PopularEsportes(equipamentoViewModel);
+
             if (equipamentoViewModel == null) return NotFound();
 
             return View(equipamentoViewModel);
