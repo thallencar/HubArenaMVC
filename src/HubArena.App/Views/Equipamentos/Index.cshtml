@@ -1,5 +1,4 @@
-﻿@using HubArena.Business.Enums
-@model IEnumerable<HubArena.App.ViewModels.EquipamentoViewModel>
+﻿@model IEnumerable<HubArena.App.ViewModels.EquipamentoViewModel>
 
 <link rel="stylesheet" href="~/css/tabelas.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
@@ -19,15 +18,6 @@
 	<tbody>
 		@foreach (var item in Model)
 		{
-			var statusEquipamento = item.StatusEquipamento switch
-			{
-				(int)StatusEquipamentoEnum.Disponivel => "Disponível",
-				(int)StatusEquipamentoEnum.EmUso => "Em Uso",
-				(int)StatusEquipamentoEnum.Reservado => "Reservado",
-				(int)StatusEquipamentoEnum.Manutencao => "Em Manutenção",
-				(int)StatusEquipamentoEnum.Danificado => "Danificado",
-				(int)StatusEquipamentoEnum.Indisponivel => "Indisponível",
-			};
             <tr>
                 <td>
                     COD.@Html.DisplayFor(modelItem => item.IdEquipamento)
@@ -36,7 +26,7 @@
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td class="td-status">
-                    @statusEquipamento
+                    @this.StatusDoEquipamento(item.StatusEquipamento)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Esporte.Nome)

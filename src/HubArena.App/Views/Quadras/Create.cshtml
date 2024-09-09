@@ -1,4 +1,6 @@
 ﻿@model HubArena.App.ViewModels.QuadraViewModel
+@using HubArena.Business.Enums
+
 
 <link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
 
@@ -12,9 +14,8 @@
 </div>
 <h2 class="subtitulo">Cadastro</h2>
 
-
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -24,13 +25,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Capacidade" class="control-label"></label>
-                <input asp-for="Capacidade" class="form-control" />
+                <input asp-for="Capacidade" class="form-control" type="text"/>
                 <span asp-validation-for="Capacidade" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoQuadra" class="control-label"></label>
-                <input asp-for="TipoQuadra" class="form-control" />
-                <span asp-validation-for="TipoQuadra" class="text-danger"></span>
+                <select multiple asp-for="TipoQuadra" class="form-control form-select">
+                    <option value="0">Aberta</option>
+                    <option value="1">Fechada</option>
+                    <option value="2">Poliesportiva</option>
+                    <option value="3">Sintética</option>
+                    <option value="4">Grama Natural</option>
+                    <option value="5">Areia</option>
+                    <option value="6">Madeira</option>
+                    <option value="7">Acrílica</option>
+                    <option value="8">Concreto</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="StatusQuadra" class="control-label"></label>
