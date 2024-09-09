@@ -9,7 +9,7 @@ namespace HubArena.Data.Repositories
     {
         public QuadraRepository(HubArenaDbContext context) : base (context) { }
 
-        public async Task<QuadraModel> ObterQuadraEsporte(int id)
+        public async Task<QuadraModel> ObterQuadra(int id)
         {
             return await Db.Quadras.AsNoTracking().Include(q => q.Esporte).FirstOrDefaultAsync(q => q.IdQuadra == id);
         }

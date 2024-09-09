@@ -34,13 +34,13 @@ namespace HubArena.App.Controllers
 
             return View(quadraViewModel);
         }
-
       
 
         // GET: Quadras/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var quadraViewModel = await PopularEsportes(new QuadraViewModel());
+            return View(quadraViewModel);
         }
 
         // POST: Quadras/Create
@@ -52,10 +52,8 @@ namespace HubArena.App.Controllers
         {
             if (! ModelState.IsValid) return View(quadraViewModel);
 
-            var quadra = _mapper.Map<QuadraModel>(quadraViewModel);
-
-            await _quadraRepository.Add(quadra);
-
+            await _quadraRepository.Add(_mapper.Map<QuadraModel>(quadraViewModel));
+            
             return RedirectToAction("Index");
 
         }
@@ -64,6 +62,8 @@ namespace HubArena.App.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var quadraViewModel = await ObterQuadra(id);
+
+            quadraViewModel = await PopularEsportes(quadraViewModel);
 
             if (quadraViewModel == null) return NotFound();
   
@@ -89,7 +89,6 @@ namespace HubArena.App.Controllers
             quadraAtualizacao.Capacidade = quadraViewModel.Capacidade;
             quadraAtualizacao.TipoQuadra = quadraViewModel.TipoQuadra;
             quadraAtualizacao.StatusQuadra = quadraViewModel.StatusQuadra;
-            //quadraAtualizacao.Endereco = quadraViewModel.Endereco;
 
             await _quadraRepository.Update(_mapper.Map<QuadraModel>(quadraAtualizacao));
 
@@ -117,16 +116,14 @@ namespace HubArena.App.Controllers
 
             if (quadraViewModel == null) return NotFound();
 
-            var quadra = _mapper.Map<QuadraModel>(quadraViewModel);
-
-            await _quadraRepository.Delete(quadra);
+            await _quadraRepository.Delete(_mapper.Map<QuadraModel>(quadraViewModel));
 
             return RedirectToAction("Index");
         }
 
         private async Task<QuadraViewModel> ObterQuadra(int id)
         {
-            return _mapper.Map<QuadraViewModel>(_quadraRepository.ObterQuadraEsporte(id));
+            return _mapper.Map<QuadraViewModel>(_quadraRepository.ObterQuadra(id));
         }
 
         private async Task<QuadraViewModel> PopularEsportes(QuadraViewModel quadraViewModel)

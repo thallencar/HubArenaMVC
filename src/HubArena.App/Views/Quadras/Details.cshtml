@@ -1,48 +1,63 @@
 ﻿@model HubArena.App.ViewModels.QuadraViewModel
 
-@{
-    ViewData["Title"] = "Details";
-}
+<link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
 
-<h1>Details</h1>
+<partial name="_HeaderLogo"></partial>
 
-<div>
-    <h4>QuadraViewModel</h4>
-    <hr />
+<div class="container-info">
+    <a asp-action="Index">
+        <img src="~/img/arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">QUADRAS</h1>
+</div>
+<h2 class="subtitulo">Informações</h2>
+
+<div class="container-dados">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Capacidade)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Capacidade)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TipoQuadra)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TipoQuadra)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StatusQuadra)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StatusQuadra)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEsporte)
+            @Html.DisplayNameFor(model => model.Esporte)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEsporte)
+            @Html.DisplayFor(model => model.Esporte.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            <span>Editar</span>
+        </dt>
+        <dd class="col-sm-10 componente-editar">
+            <a asp-action="Edit" asp-route-id="@Model?.IdQuadra">
+                <img src="~/img/pencil.svg" />
+            </a>
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdQuadra">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="componente-apagar">
+    <span>Apagar</span>
+    <a asp-action="Delete" asp-route-id="@Model?.IdQuadra">
+        <img src="~/img/trash.svg" />
+    </a>
 </div>
+

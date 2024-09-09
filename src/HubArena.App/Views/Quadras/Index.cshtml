@@ -1,59 +1,44 @@
 ﻿@model IEnumerable<HubArena.App.ViewModels.QuadraViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<link rel="stylesheet" href="~/css/tabelas.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
-<h1>Index</h1>
+<partial name="_HeaderLogo"></partial>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1 class="titulo">QUADRAS</h1>
+<div class="container-create">
+    <a asp-action="Create" class="subtitulo">
+        <img src="~/img/plus.svg" alt="">
+        Adicionar nova quadra
+    </a>
+</div>
+
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capacidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoQuadra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusQuadra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdEsporte)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoQuadra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusQuadra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdEsporte)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdQuadra">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdQuadra">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdQuadra">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoQuadra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusQuadra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Esporte.Nome)
+                </td>
+                <td class="td-view">
+                    <a asp-action="Details" asp-route-id="@item.IdQuadra">
+                        <img src="~/img/view.svg" alt="View" />
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
