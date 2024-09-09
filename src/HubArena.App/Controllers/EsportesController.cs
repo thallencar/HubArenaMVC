@@ -76,9 +76,7 @@ namespace HubArena.App.Controllers
 
             if (!ModelState.IsValid) return View(esporteViewModel);
 
-            var esporte = _mapper.Map<EsporteModel>(esporteViewModel);
-
-            await _esporteRepository.Update(esporte);
+            await _esporteRepository.Update(_mapper.Map<EsporteModel>(esporteViewModel));
 
             return RedirectToAction("Index");
         }

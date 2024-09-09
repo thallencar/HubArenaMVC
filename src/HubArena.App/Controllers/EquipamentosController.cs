@@ -38,8 +38,8 @@ namespace HubArena.App.Controllers
         // GET: Equipamentos/Create
         public async Task<IActionResult> Create()
         {
-            var produtoViewModel = await PopularEsportes(new EquipamentoViewModel());
-            return View(produtoViewModel);
+            var equipamentoViewModel = await PopularEsportes(new EquipamentoViewModel());
+            return View(equipamentoViewModel);
         }
 
         // POST: Equipamentos/Create

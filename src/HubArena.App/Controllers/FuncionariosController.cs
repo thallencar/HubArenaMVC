@@ -50,9 +50,7 @@ namespace HubArena.App.Controllers
         {
             if (!ModelState.IsValid) return View(funcionarioViewModel);
 
-            var funcionario = _mapper.Map<FuncionarioModel>(funcionarioViewModel);
-
-            await _funcionarioRepository.Add(funcionario);
+            await _funcionarioRepository.Add(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
 
             return RedirectToAction("Index");
         }
@@ -78,9 +76,7 @@ namespace HubArena.App.Controllers
 
             if (!ModelState.IsValid) return View(funcionarioViewModel);
 
-            var funcionario = _mapper.Map<FuncionarioModel>(funcionarioViewModel);
-
-            await _funcionarioRepository.Update(funcionario);
+            await _funcionarioRepository.Update(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
 
             return RedirectToAction(nameof(Index));
         }
@@ -105,6 +101,7 @@ namespace HubArena.App.Controllers
             if (funcionarioViewModel == null) return NotFound();
 
             await _funcionarioRepository.Delete(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
+
             return RedirectToAction("Index");
         }
 
