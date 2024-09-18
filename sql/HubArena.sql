@@ -155,7 +155,78 @@ CREATE INDEX [IX_TB_RESERVA_EQUIPAMENTO_IdReserva] ON [TB_RESERVA_EQUIPAMENTO] (
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240820175533_MappingModels', N'8.0.7');
+VALUES (N'20240820175533_MappingModels', N'8.0.8');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[TB_ENDERECO_QUADRA]') AND [c].[name] = N'Numero');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [TB_ENDERECO_QUADRA] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [TB_ENDERECO_QUADRA] ALTER COLUMN [Numero] int NULL;
+GO
+
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[TB_ENDERECO_FUNCIONARIO]') AND [c].[name] = N'Numero');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [TB_ENDERECO_FUNCIONARIO] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [TB_ENDERECO_FUNCIONARIO] ALTER COLUMN [Numero] int NULL;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240822183134_NumberNotNull', N'8.0.8');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [TB_ESPORTE] DROP CONSTRAINT [FK_TB_ESPORTE_TB_EQUIPAMENTO_IdEquipamento];
+GO
+
+DROP INDEX [IX_TB_ESPORTE_IdEquipamento] ON [TB_ESPORTE];
+GO
+
+DECLARE @var2 sysname;
+SELECT @var2 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[TB_ESPORTE]') AND [c].[name] = N'Descricao');
+IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [TB_ESPORTE] DROP CONSTRAINT [' + @var2 + '];');
+ALTER TABLE [TB_ESPORTE] DROP COLUMN [Descricao];
+GO
+
+DECLARE @var3 sysname;
+SELECT @var3 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[TB_ESPORTE]') AND [c].[name] = N'IdEquipamento');
+IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [TB_ESPORTE] DROP CONSTRAINT [' + @var3 + '];');
+ALTER TABLE [TB_ESPORTE] DROP COLUMN [IdEquipamento];
+GO
+
+ALTER TABLE [TB_EQUIPAMENTO] ADD [IdEsporte] int NOT NULL DEFAULT 0;
+GO
+
+CREATE INDEX [IX_TB_EQUIPAMENTO_IdEsporte] ON [TB_EQUIPAMENTO] ([IdEsporte]);
+GO
+
+ALTER TABLE [TB_EQUIPAMENTO] ADD CONSTRAINT [FK_TB_EQUIPAMENTO_TB_ESPORTE_IdEsporte] FOREIGN KEY ([IdEsporte]) REFERENCES [TB_ESPORTE] ([IdEsporte]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240823201127_ChangesEquipamentoEsporte', N'8.0.8');
 GO
 
 COMMIT;
