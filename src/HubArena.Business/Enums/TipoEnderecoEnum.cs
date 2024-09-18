@@ -2,7 +2,7 @@
 {
     public enum TipoEnderecoEnum
     {
-        Funcionario,
+        Funcionario ,
         Quadra
     }
 }

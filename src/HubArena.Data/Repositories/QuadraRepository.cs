@@ -11,13 +11,12 @@ namespace HubArena.Data.Repositories
 
         public async Task<QuadraModel> ObterQuadra(int id)
         {
-            return await Db.Quadras.AsNoTracking().Include(q => q.Esporte).FirstOrDefaultAsync(q => q.IdQuadra == id);
+            return await Db.Quadras.AsNoTracking().Include(q => q.Esporte).Include(q => q.Endereco).FirstOrDefaultAsync(q => q.IdQuadra == id);
         }
 
         public async Task<IEnumerable<QuadraModel>> ObterQuadrasEsportes()
         {
             return await Db.Quadras.AsNoTracking().Include(q => q.Esporte).OrderBy(q => q.Nome).ToListAsync();
         }
-
     }
 }

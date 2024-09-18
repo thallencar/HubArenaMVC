@@ -19,7 +19,7 @@ public class QuadraMapping : IEntityTypeConfiguration<QuadraModel>
         // Relacionamento com Endereco 1:1
         builder.HasOne(q => q.Endereco)
             .WithOne(e => e.Quadra)
-            .HasForeignKey<QuadraModel>(q => q.IdEndereco);
+            .HasForeignKey<EnderecoModel>(e => e.IdQuadra);
 
         // Relacionamento Quadra com Esporte 1:N
         builder.HasOne(q => q.Esporte)

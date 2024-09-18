@@ -39,12 +39,16 @@ public class EnderecoMapping : IEntityTypeConfiguration<EnderecoModel>
             .HasColumnType("varchar(100)");
 
         builder.Property(e => e.TipoEndereco)
-           .HasColumnType("varchar(10)");
+           .HasColumnType("varchar(12)");
 
 
         builder.HasOne(e => e.Funcionario)
                .WithOne(f => f.Endereco)
                .HasForeignKey<EnderecoModel>(e => e.IdFuncionario);
+
+        builder.HasOne(e => e.Quadra)
+               .WithOne(q => q.Endereco)
+               .HasForeignKey<EnderecoModel>(e => e.IdQuadra);
 
 
         builder.ToTable("TB_ENDERECO");

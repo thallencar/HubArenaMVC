@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HubArena.App.ViewModels;
+using HubArena.Business.Enums;
 using HubArena.Business.Interfaces;
 using HubArena.Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace HubArena.App.Controllers
         // GET: Quadras
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<QuadraViewModel>>(await _quadraRepository.ObterQuadrasEsportes()));
+            return View(_mapper.Map<IEnumerable<QuadraViewModel>>(await _quadraRepository.GetAll()));
         }
 
         // GET: Quadras/Details/5
@@ -51,6 +52,10 @@ namespace HubArena.App.Controllers
         public async Task<IActionResult> Create(QuadraViewModel quadraViewModel)
         {
             if (! ModelState.IsValid) return View(quadraViewModel);
+
+            quadraViewModel.Endereco.TipoEndereco = (int)TipoEnderecoEnum.Quadra;
+
+            quadraViewModel.Endereco.IdFuncionario = null;
 
             await _quadraRepository.Add(_mapper.Map<QuadraModel>(quadraViewModel));
             
@@ -123,7 +128,7 @@ namespace HubArena.App.Controllers
 
         private async Task<QuadraViewModel> ObterQuadra(int id)
         {
-            return _mapper.Map<QuadraViewModel>(_quadraRepository.ObterQuadra(id));
+            return _mapper.Map<QuadraViewModel>(await _quadraRepository.ObterQuadra(id));
         }
 
         private async Task<QuadraViewModel> PopularEsportes(QuadraViewModel quadraViewModel)

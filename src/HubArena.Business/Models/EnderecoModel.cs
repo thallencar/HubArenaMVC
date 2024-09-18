@@ -15,8 +15,9 @@ namespace HubArena.Business.Models
         public string PontoReferencia { get; set; }
         public TipoEnderecoEnum TipoEndereco { get; set; }
 
-        public int IdFuncionario { get; set; }
+        public int? IdFuncionario { get; set; }
         public FuncionarioModel Funcionario { get; set; }
+        public int? IdQuadra { get; set; }
         public QuadraModel Quadra { get; set; }
     }
 }

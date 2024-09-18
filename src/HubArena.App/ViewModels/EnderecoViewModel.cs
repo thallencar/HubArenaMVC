@@ -43,7 +43,10 @@ namespace HubArena.App.ViewModels
         public int TipoEndereco { get; set; }
 
         [HiddenInput]
-        public int IdFuncionario { get; set; }
+        public int? IdFuncionario { get; set; }
+        
+        [HiddenInput]
+        public int? IdQuadra { get; set; }
 
     }
 }

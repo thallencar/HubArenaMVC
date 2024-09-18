@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HubArena.App.ViewModels;
+using HubArena.Business.Enums;
 using HubArena.Business.Interfaces;
 using HubArena.Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,10 @@ namespace HubArena.App.Controllers
         public async Task<IActionResult> Create(FuncionarioViewModel funcionarioViewModel)
         {
             if (!ModelState.IsValid) return View(funcionarioViewModel);
+
+            funcionarioViewModel.Endereco.TipoEndereco = (int)TipoEnderecoEnum.Funcionario;
+
+            funcionarioViewModel.Endereco.IdQuadra = null;
 
             await _funcionarioRepository.Add(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
 
