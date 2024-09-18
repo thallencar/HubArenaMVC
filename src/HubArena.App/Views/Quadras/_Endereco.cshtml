@@ -1,4 +1,5 @@
-﻿@model HubArena.App.ViewModels.QuadraViewModel
+﻿@using HubArena.Business.Enums
+@model HubArena.App.ViewModels.QuadraViewModel
 
 <div class="form-group">
     <label asp-for="Endereco.Cep" class="control-label"></label>
@@ -42,9 +43,6 @@
 </div>
 <div class="form-group">
     <label asp-for="Endereco.TipoEndereco" class="control-label"></label>
-    <select asp-for="Endereco.TipoEndereco" class="form-select">
-        <option value="0">Funcionário</option>
-        <option value="1">Quadra</option>
-    </select>
+    <input asp-for="Endereco.TipoEndereco" class="form-control" />
     <span asp-validation-for="Endereco.TipoEndereco" class="text-danger"></span>
 </div>

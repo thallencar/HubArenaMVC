@@ -48,7 +48,8 @@
     }
 
     .td-status {
-        display: table-cell;
+        display: table-cell;     
+        text-align: center;
     }
 
     .td-view img {

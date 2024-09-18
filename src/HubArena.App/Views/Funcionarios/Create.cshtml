@@ -1,15 +1,21 @@
 ﻿@model HubArena.App.ViewModels.FuncionarioViewModel
 @using HubArena.Business.Enums
 
-<link rel="stylesheet" href="~/css/cadastro.css" asp-append-version="true" />
 
+<link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
 
-<h1>Create</h1>
+<partial name="_HeaderLogo"></partial>
 
-<h4>FuncionarioViewModel</h4>
-<hr />
+<div class="container-info">
+    <a asp-action="Index">
+        <img src="~/img/arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">QUADRAS</h1>
+</div>
+<h2 class="subtitulo">Cadastro</h2>
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

@@ -1,4 +1,5 @@
-﻿@model HubArena.App.ViewModels.FuncionarioViewModel
+﻿@using HubArena.Business.Enums
+@model HubArena.App.ViewModels.FuncionarioViewModel
 
 <div class="form-group">
     <label asp-for="Endereco.Cep" class="control-label"></label>
@@ -40,6 +41,8 @@
     <input asp-for="Endereco.PontoReferencia" class="form-control" />
     <span asp-validation-for="Endereco.PontoReferencia" class="text-danger"></span>
 </div>
+
+
 <div class="form-group">
     <label asp-for="Endereco.TipoEndereco" class="control-label"></label>
     <input asp-for="Endereco.TipoEndereco" class="form-control" />

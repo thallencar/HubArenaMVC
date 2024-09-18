@@ -44,7 +44,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="StatusQuadra" class="control-label"></label>
-                <input asp-for="StatusQuadra" class="form-control" />
+                <select asp-for="StatusQuadra" class="form-control form-select">
+                    <option value="0">Disponível</option>
+                    <option value="1">Reservada</option>
+                    <option value="2">Em Uso</option>
+                    <option value="3">Em Manutenção</option>
+                    <option value="4">Indisponível</option>
+                </select>
                 <span asp-validation-for="StatusQuadra" class="text-danger"></span>
             </div>
             <div class="form-group">
