@@ -4,6 +4,7 @@ using HubArena.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    partial class HubArenaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918193800_UpdateEnderecoMapping")]
+    partial class UpdateEnderecoMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,10 +83,10 @@ namespace HubArena.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int?>("IdFuncionario")
+                    b.Property<int>("IdFuncionario")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdQuadra")
+                    b.Property<int>("IdQuadra")
                         .HasColumnType("int");
 
                     b.Property<string>("Logradouro")
@@ -103,12 +106,10 @@ namespace HubArena.Data.Migrations
                     b.HasKey("IdEndereco");
 
                     b.HasIndex("IdFuncionario")
-                        .IsUnique()
-                        .HasFilter("[IdFuncionario] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("IdQuadra")
-                        .IsUnique()
-                        .HasFilter("[IdQuadra] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("TB_ENDERECO", (string)null);
                 });
@@ -316,11 +317,13 @@ namespace HubArena.Data.Migrations
                 {
                     b.HasOne("HubArena.Business.Models.FuncionarioModel", "Funcionario")
                         .WithOne("Endereco")
-                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdFuncionario");
+                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdFuncionario")
+                        .IsRequired();
 
                     b.HasOne("HubArena.Business.Models.QuadraModel", "Quadra")
                         .WithOne("Endereco")
-                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdQuadra");
+                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdQuadra")
+                        .IsRequired();
 
                     b.Navigation("Funcionario");
 

@@ -68,6 +68,29 @@ namespace HubArena.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TB_QUADRA",
+                columns: table => new
+                {
+                    IdQuadra = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "varchar(150)", nullable: false),
+                    Capacidade = table.Column<int>(type: "int", nullable: false),
+                    TipoQuadra = table.Column<int>(type: "int", nullable: false),
+                    StatusQuadra = table.Column<int>(type: "int", nullable: false),
+                    IdEndereco = table.Column<int>(type: "int", nullable: false),
+                    IdEsporte = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_QUADRA", x => x.IdQuadra);
+                    table.ForeignKey(
+                        name: "FK_TB_QUADRA_TB_ESPORTE_IdEsporte",
+                        column: x => x.IdEsporte,
+                        principalTable: "TB_ESPORTE",
+                        principalColumn: "IdEsporte");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TB_CONTATO",
                 columns: table => new
                 {
@@ -104,7 +127,8 @@ namespace HubArena.Data.Migrations
                     Complemento = table.Column<string>(type: "varchar(50)", nullable: true),
                     PontoReferencia = table.Column<string>(type: "varchar(100)", nullable: true),
                     TipoEndereco = table.Column<string>(type: "varchar(10)", nullable: false),
-                    IdFuncionario = table.Column<int>(type: "int", nullable: false)
+                    IdFuncionario = table.Column<int>(type: "int", nullable: false),
+                    IdQuadra = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,34 +138,11 @@ namespace HubArena.Data.Migrations
                         column: x => x.IdFuncionario,
                         principalTable: "TB_FUNCIONARIO",
                         principalColumn: "IdFuncionario");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TB_QUADRA",
-                columns: table => new
-                {
-                    IdQuadra = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(150)", nullable: false),
-                    Capacidade = table.Column<int>(type: "int", nullable: false),
-                    TipoQuadra = table.Column<int>(type: "int", nullable: false),
-                    StatusQuadra = table.Column<int>(type: "int", nullable: false),
-                    IdEndereco = table.Column<int>(type: "int", nullable: false),
-                    IdEsporte = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TB_QUADRA", x => x.IdQuadra);
                     table.ForeignKey(
-                        name: "FK_TB_QUADRA_TB_ENDERECO_IdEndereco",
-                        column: x => x.IdEndereco,
-                        principalTable: "TB_ENDERECO",
-                        principalColumn: "IdEndereco");
-                    table.ForeignKey(
-                        name: "FK_TB_QUADRA_TB_ESPORTE_IdEsporte",
-                        column: x => x.IdEsporte,
-                        principalTable: "TB_ESPORTE",
-                        principalColumn: "IdEsporte");
+                        name: "FK_TB_ENDERECO_TB_QUADRA_IdQuadra",
+                        column: x => x.IdQuadra,
+                        principalTable: "TB_QUADRA",
+                        principalColumn: "IdQuadra");
                 });
 
             migrationBuilder.CreateTable(
@@ -209,15 +210,15 @@ namespace HubArena.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TB_ENDERECO_IdQuadra",
+                table: "TB_ENDERECO",
+                column: "IdQuadra",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TB_EQUIPAMENTO_IdEsporte",
                 table: "TB_EQUIPAMENTO",
                 column: "IdEsporte");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TB_QUADRA_IdEndereco",
-                table: "TB_QUADRA",
-                column: "IdEndereco",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_QUADRA_IdEsporte",
@@ -252,6 +253,9 @@ namespace HubArena.Data.Migrations
                 name: "TB_CONTATO");
 
             migrationBuilder.DropTable(
+                name: "TB_ENDERECO");
+
+            migrationBuilder.DropTable(
                 name: "TB_RESERVA_EQUIPAMENTO");
 
             migrationBuilder.DropTable(
@@ -261,16 +265,13 @@ namespace HubArena.Data.Migrations
                 name: "TB_RESERVA");
 
             migrationBuilder.DropTable(
+                name: "TB_FUNCIONARIO");
+
+            migrationBuilder.DropTable(
                 name: "TB_QUADRA");
 
             migrationBuilder.DropTable(
-                name: "TB_ENDERECO");
-
-            migrationBuilder.DropTable(
                 name: "TB_ESPORTE");
-
-            migrationBuilder.DropTable(
-                name: "TB_FUNCIONARIO");
         }
     }
 }

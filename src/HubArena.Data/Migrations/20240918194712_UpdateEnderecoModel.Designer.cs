@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HubArena.Data.Migrations
 {
     [DbContext(typeof(HubArenaDbContext))]
-    [Migration("20240905175230_MappingModels")]
-    partial class MappingModels
+    [Migration("20240918194712_UpdateEnderecoModel")]
+    partial class UpdateEnderecoModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,10 @@ namespace HubArena.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("IdFuncionario")
+                    b.Property<int?>("IdFuncionario")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdQuadra")
                         .HasColumnType("int");
 
                     b.Property<string>("Logradouro")
@@ -98,12 +101,17 @@ namespace HubArena.Data.Migrations
 
                     b.Property<string>("TipoEndereco")
                         .IsRequired()
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(12)");
 
                     b.HasKey("IdEndereco");
 
                     b.HasIndex("IdFuncionario")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IdFuncionario] IS NOT NULL");
+
+                    b.HasIndex("IdQuadra")
+                        .IsUnique()
+                        .HasFilter("[IdQuadra] IS NOT NULL");
 
                     b.ToTable("TB_ENDERECO", (string)null);
                 });
@@ -231,9 +239,6 @@ namespace HubArena.Data.Migrations
 
                     b.HasKey("IdQuadra");
 
-                    b.HasIndex("IdEndereco")
-                        .IsUnique();
-
                     b.HasIndex("IdEsporte");
 
                     b.ToTable("TB_QUADRA", (string)null);
@@ -314,10 +319,15 @@ namespace HubArena.Data.Migrations
                 {
                     b.HasOne("HubArena.Business.Models.FuncionarioModel", "Funcionario")
                         .WithOne("Endereco")
-                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdFuncionario")
-                        .IsRequired();
+                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdFuncionario");
+
+                    b.HasOne("HubArena.Business.Models.QuadraModel", "Quadra")
+                        .WithOne("Endereco")
+                        .HasForeignKey("HubArena.Business.Models.EnderecoModel", "IdQuadra");
 
                     b.Navigation("Funcionario");
+
+                    b.Navigation("Quadra");
                 });
 
             modelBuilder.Entity("HubArena.Business.Models.EquipamentoModel", b =>
@@ -332,17 +342,10 @@ namespace HubArena.Data.Migrations
 
             modelBuilder.Entity("HubArena.Business.Models.QuadraModel", b =>
                 {
-                    b.HasOne("HubArena.Business.Models.EnderecoModel", "Endereco")
-                        .WithOne("Quadra")
-                        .HasForeignKey("HubArena.Business.Models.QuadraModel", "IdEndereco")
-                        .IsRequired();
-
                     b.HasOne("HubArena.Business.Models.EsporteModel", "Esporte")
                         .WithMany("Quadras")
                         .HasForeignKey("IdEsporte")
                         .IsRequired();
-
-                    b.Navigation("Endereco");
 
                     b.Navigation("Esporte");
                 });
@@ -381,11 +384,6 @@ namespace HubArena.Data.Migrations
                     b.Navigation("Quadra");
                 });
 
-            modelBuilder.Entity("HubArena.Business.Models.EnderecoModel", b =>
-                {
-                    b.Navigation("Quadra");
-                });
-
             modelBuilder.Entity("HubArena.Business.Models.EquipamentoModel", b =>
                 {
                     b.Navigation("ReservaEquipamentos");
@@ -409,6 +407,8 @@ namespace HubArena.Data.Migrations
 
             modelBuilder.Entity("HubArena.Business.Models.QuadraModel", b =>
                 {
+                    b.Navigation("Endereco");
+
                     b.Navigation("Reservas");
                 });
 
