@@ -1,4 +1,9 @@
-﻿.container-info {
+﻿body,
+html {
+    overflow-y: auto;
+}
+
+.container-info {
     display: flex;
     align-items: center;
     margin-left: 30px;
@@ -121,7 +126,7 @@ dd {
     }
 
     .componente-apagar {
-        position: fixed; 
+        position: static; 
         bottom: 20px;
         width: 95%;
     }
