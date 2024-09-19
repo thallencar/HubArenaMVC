@@ -1,0 +1,46 @@
+﻿@using HubArena.Business.Enums
+@model HubArena.App.ViewModels.FuncionarioViewModel
+
+<div class="pt-3">
+    <div>
+        <h4>Endereço</h4>
+    </div>
+    @if (Model != null)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>CEP</th>
+                    <th>UF</th>
+                    <th>Cidade</th>
+                    <th>Bairro</th>
+                    <th>Logradouro</th>
+                    <th>Número</th>
+                    <th>Complemento</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Endereco.Cep)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Estado)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Cidade)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Bairro)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Logradouro)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Numero)</td>
+                    <td>@Html.DisplayFor(model => model.Endereco.Complemento)</td>
+                    <td>
+                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.Endereco.IdEndereco" class="btn btn-outline-info" data-modal="">
+                            aaaaaa
+                            </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+<script>
+    SetModal();
+</script>
+

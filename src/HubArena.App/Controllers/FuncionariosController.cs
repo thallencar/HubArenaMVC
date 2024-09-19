@@ -10,18 +10,20 @@ namespace HubArena.App.Controllers
     public class FuncionariosController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly IEnderecoRepository _enderecoRepository;
         private readonly IMapper _mapper;
 
-        public FuncionariosController(IFuncionarioRepository funcionarioRepository, IMapper mapper)
+        public FuncionariosController(IFuncionarioRepository funcionarioRepository, IEnderecoRepository enderecoRepository, IMapper mapper)
         {
             _funcionarioRepository = funcionarioRepository;
+            _enderecoRepository = enderecoRepository;
             _mapper = mapper;
         }
 
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<FuncionarioViewModel>>(await _funcionarioRepository.GetAll()));
+            return View(_mapper.Map<IEnumerable<FuncionarioViewModel>>(await _funcionarioRepository.ObterFuncionariosEnderecos()));
         }
 
         // GET: Funcionarios/Details/5
@@ -52,8 +54,9 @@ namespace HubArena.App.Controllers
             if (!ModelState.IsValid) return View(funcionarioViewModel);
 
             funcionarioViewModel.Endereco.TipoEndereco = (int)TipoEnderecoEnum.Funcionario;
-
             funcionarioViewModel.Endereco.IdQuadra = null;
+
+            funcionarioViewModel.StatusPessoa = (int)StatusPessoaEnum.Ativo;
 
             await _funcionarioRepository.Add(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
 
@@ -108,6 +111,38 @@ namespace HubArena.App.Controllers
             await _funcionarioRepository.Delete(_mapper.Map<FuncionarioModel>(funcionarioViewModel));
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> AtualizarEndereco(int id)
+        {
+            var funcionario = await ObterFuncionarioEndereco(id);
+
+            if (funcionario == null) return NotFound();
+
+            return PartialView("_EnderecoEdit", new FuncionarioViewModel { Endereco = funcionario.Endereco });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AtualizarEndereco (FuncionarioViewModel funcionarioViewModel)
+        {
+            //Ignora os campos obrigatórios da viewmodel
+            ModelState.Remove("Nome");
+            ModelState.Remove("Cargo");
+            ModelState.Remove("Documento");
+            ModelState.Remove("DataNascimento");
+            ModelState.Remove("Email");
+            ModelState.Remove("Usuario");
+            ModelState.Remove("Senha");
+            ModelState.Remove("StatusPessoa");
+
+            if (!ModelState.IsValid) return PartialView("_EnderecoEdit", funcionarioViewModel.Endereco);
+
+            await _enderecoRepository.Update(_mapper.Map<EnderecoModel>(funcionarioViewModel.Endereco));
+
+            var url = Url.Action("ObterEndereco", "Fornecedores", new { id = funcionarioViewModel.Endereco.IdFuncionario });
+
+            return Json(new { success = true, url });
         }
 
         private async Task<FuncionarioViewModel> ObterFuncionarioEndereco(int id)

@@ -1,0 +1,31 @@
+﻿@using HubArena.Business.Enums
+@model HubArena.App.ViewModels.FuncionarioViewModel
+
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["Title"]</h4c>
+</div>
+
+<form asp-action="AtualizarEndereco" id="frm-atualizar-endereco">
+    <div class="modal-body">
+        <input type="hidden" asp-for="Endereco.IdEndereco" />
+        <input type="hidden" asp-for="Endereco.IdFuncionario" />
+
+        <partial name="_Endereco" />
+    </div>
+    <input type="submit" class="btn" />
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" id="btn-atualizar">Atualizar</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+</div>
+
+<script>
+    BuscarCep();
+    $("#btn-atualizar").click(function () {
+        $("#frm-atualizar-endereco").submit();
+    });
+</script>
+
+
+

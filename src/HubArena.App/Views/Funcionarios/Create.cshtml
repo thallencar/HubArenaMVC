@@ -1,5 +1,4 @@
 ﻿@model HubArena.App.ViewModels.FuncionarioViewModel
-@using HubArena.Business.Enums
 
 
 <link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
@@ -10,7 +9,7 @@
     <a asp-action="Index">
         <img src="~/img/arrow.svg" alt="">
     </a>
-    <h1 class="titulo">QUADRAS</h1>
+    <h1 class="titulo">FUNCIONÁRIOS</h1>
 </div>
 <h2 class="subtitulo">Cadastro</h2>
 
@@ -62,14 +61,6 @@
                 <label asp-for="Senha" class="control-label"></label>
                 <input asp-for="Senha" class="form-control" type="password" />
                 <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusPessoa"></label>
-                <select asp-for="StatusPessoa" class="form-control form-select"
-                        asp-items="@Html.GetEnumSelectList<StatusPessoaEnum>()">
-                    <option value="" selected disabled>Selecione o status</option>
-                </select>
-                <span asp-validation-for="StatusPessoa" class="text-danger"></span>
             </div>
             <h4 class="mt-3">Endereço</h4>
             <hr />

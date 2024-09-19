@@ -6,5 +6,6 @@ namespace HubArena.Business.Interfaces
     {
         Task<FuncionarioModel> ObterFuncionario(int id);
         Task<FuncionarioModel> ObterFuncionarioEndereco(int id);
+        Task <IEnumerable<FuncionarioModel>> ObterFuncionariosEnderecos();
     }
 }

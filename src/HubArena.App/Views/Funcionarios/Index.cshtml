@@ -13,7 +13,7 @@
     </a>
 </div>
 
-<table class="table">
+<table>
     <tbody>
         @foreach (var item in Model)
         {
@@ -27,24 +27,30 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Documento)
                 </td>
+                @{/*
                 <td>
                     @Html.DisplayFor(modelItem => item.DataNascimento)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sexo)
                 </td>
+                */}
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Usuario)
                 </td>
+                @{/*
                 <td>
                     @Html.DisplayFor(modelItem => item.Senha)
                 </td>
+                */}
                 <td>
-                    @Html.DisplayFor(modelItem => item.StatusPessoa)
+                    @this.StatusDaPessoa(item.StatusPessoa)
                 </td>
+                
+                
                 <td class="td-view">
                     <a asp-action="Details" asp-route-id="@item.IdFuncionario">
                         <img src="~/img/view.svg" alt="View" />

@@ -1,13 +1,18 @@
-﻿@model HubArena.App.ViewModels.FuncionarioViewModel
+﻿@using HubArena.Business.Enums
+@model HubArena.App.ViewModels.FuncionarioViewModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
+<link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
 
-<h1>Edit</h1>
+<partial name="_HeaderLogo"></partial>
 
-<h4>FuncionarioViewModel</h4>
-<hr />
+<div class="container-info">
+    <a asp-action="Details" asp-route-id="@Model.IdFuncionario">
+        <img src="~/img/arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">FUNCIONÁRIOS</h1>
+</div>
+<h2 class="subtitulo">Editar</h2>
+
 <div class="row">
     <div class="col-md-5">
         <form asp-action="Edit">
@@ -54,19 +59,18 @@
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StatusPessoa" class="control-label"></label>
-                <input asp-for="StatusPessoa" class="form-control" />
+                <label asp-for="StatusPessoa"></label>
+                <select asp-for="StatusPessoa" class="form-control form-select"
+                        asp-items="@Html.GetEnumSelectList<StatusPessoaEnum>()">
+                    <option value="" selected disabled>Selecione o status</option>
+                </select>
                 <span asp-validation-for="StatusPessoa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn-form-cadastrar" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

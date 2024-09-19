@@ -1,14 +1,18 @@
 ﻿@model HubArena.App.ViewModels.FuncionarioViewModel
 
-@{
-    ViewData["Title"] = "Details";
-}
+<link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
 
-<h1>Details</h1>
+<partial name="_HeaderLogo"></partial>
 
-<div>
-    <h4>FuncionarioViewModel</h4>
-    <hr />
+<div class="container-info">
+    <a asp-action="Index">
+        <img src="~/img/arrow.svg" alt="">
+    </a>
+    <h1 class="titulo">FUNCIONÁRIOS</h1>
+</div>
+<h2 class="subtitulo">Informações</h2>
+
+<div class="container-dados">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
@@ -28,7 +32,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Documento)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-3">
             @Html.DisplayNameFor(model => model.DataNascimento)
         </dt>
         <dd class = "col-sm-10">
@@ -62,11 +66,21 @@
             @Html.DisplayNameFor(model => model.StatusPessoa)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StatusPessoa)
+            @this.StatusDaPessoa(Model.StatusPessoa)
+        </dd>
+
+        <partial name="_EnderecoDetails"/>
+
+        <dd class="col-sm-10 componente-editar">
+            <a asp-action="Edit" asp-route-id="@Model?.IdFuncionario">
+                <img src="~/img/pencil.svg" />
+            </a>
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdFuncionario">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="componente-apagar">
+    <span>Apagar</span>
+    <a asp-action="Delete" asp-route-id="@Model?.IdFuncionario">
+        <img src="~/img/trash.svg" />
+    </a>
 </div>

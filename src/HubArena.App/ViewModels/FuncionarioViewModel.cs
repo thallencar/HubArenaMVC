@@ -23,7 +23,7 @@ namespace HubArena.App.ViewModels
         public string Documento { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [DisplayName ("Data de Nascimento")]
+        [DisplayName ("Data de Nascimento"), DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
         public string Sexo { get; set; }
@@ -43,6 +43,7 @@ namespace HubArena.App.ViewModels
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         [DisplayName("Status")]
+        [ScaffoldColumn(false)]
         public int StatusPessoa { get; set; }
 
         [ScaffoldColumn(false)]
