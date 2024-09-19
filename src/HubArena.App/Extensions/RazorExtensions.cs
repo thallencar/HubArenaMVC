@@ -32,7 +32,18 @@ namespace HubArena.App.Extensions
                 (int)StatusQuadraEnum.Manutencao => "Em Manutenção",
                 (int)StatusEquipamentoEnum.Indisponivel => "Indisponível",
             };
-        } 
+        }
+        
+        public static string StatusDaPessoa(this RazorPage page, int statusPessoa)
+        {
+            return statusPessoa switch
+            {
+                (int)StatusPessoaEnum.Ativo => "Ativo",
+                (int)StatusPessoaEnum.Inativo => "Inativo",
+                (int)StatusPessoaEnum.Bloqueado => "Bloqueado",
+                (int)StatusPessoaEnum.Suspenso => "Suspenso",
+            };
+        }
 
     }
 }

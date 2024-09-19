@@ -23,7 +23,7 @@ namespace HubArena.App.Controllers
         // GET: Quadras
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<QuadraViewModel>>(await _quadraRepository.GetAll()));
+            return View(_mapper.Map<IEnumerable<QuadraViewModel>>(await _quadraRepository.ObterQuadrasEsportes()));
         }
 
         // GET: Quadras/Details/5

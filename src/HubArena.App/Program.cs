@@ -28,6 +28,7 @@ namespace HubArena.App
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<HubArenaDbContext>();    
             builder.Services.AddScoped<IEsporteRepository, EsporteRepository>();
+            builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             builder.Services.AddScoped<IEquipamentoRepository, EquipamentoRepository>();
             builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             builder.Services.AddScoped<IQuadraRepository, QuadraRepository>();
