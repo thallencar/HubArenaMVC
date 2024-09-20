@@ -69,7 +69,9 @@
             @this.StatusDaPessoa(Model.StatusPessoa)
         </dd>
 
-        <partial name="_EnderecoDetails"/>
+        <div id="EnderecoTarget">
+            <partial name="_EnderecoDetails" />
+        </div>
 
         <dd class="col-sm-10 componente-editar">
             <a asp-action="Edit" asp-route-id="@Model?.IdFuncionario">
@@ -84,3 +86,23 @@
         <img src="~/img/trash.svg" />
     </a>
 </div>
+
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            SetModal();
+        });
+    </script>
+}

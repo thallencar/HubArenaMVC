@@ -140,7 +140,7 @@ namespace HubArena.App.Controllers
 
             await _enderecoRepository.Update(_mapper.Map<EnderecoModel>(funcionarioViewModel.Endereco));
 
-            var url = Url.Action("ObterEndereco", "Fornecedores", new { id = funcionarioViewModel.Endereco.IdFuncionario });
+            var url = Url.Action("ObterEndereco", "Funcionarios", new { id = funcionarioViewModel.Endereco.IdFuncionario });
 
             return Json(new { success = true, url });
         }

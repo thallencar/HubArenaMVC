@@ -82,6 +82,21 @@ dd {
     padding: 10px;
 }
 
+#frm-atualizar-endereco {
+    background-color: var(--background);
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 4rem 0;
+    width: 80%;
+}
+
+.modal-body .form-group{
+    margin-bottom: 12px;
+}
+
 
 @media (min-width: 1024px) {
     .container-info {

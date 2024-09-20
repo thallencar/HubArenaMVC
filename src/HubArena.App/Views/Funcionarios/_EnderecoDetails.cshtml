@@ -1,5 +1,5 @@
 ﻿@using HubArena.Business.Enums
-@model HubArena.App.ViewModels.FuncionarioViewModel
+@model FuncionarioViewModel
 
 <div class="pt-3">
     <div>
@@ -30,9 +30,9 @@
                     <td>@Html.DisplayFor(model => model.Endereco.Numero)</td>
                     <td>@Html.DisplayFor(model => model.Endereco.Complemento)</td>
                     <td>
-                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.Endereco.IdEndereco" class="btn btn-outline-info" data-modal="">
-                            aaaaaa
-                            </a>
+                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.IdFuncionario" class="btn btn-outline-warning" data-modal="">
+                            <span class="fa fa-pencil-alt"></span>
+                        </a>
                     </td>
                 </tr>
             </tbody>
