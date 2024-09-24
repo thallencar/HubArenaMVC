@@ -54,4 +54,26 @@ h1 {
     .btn-entrar {
         width: 35%;
     }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #26929a;
+        border: 0px none #ffffff;
+        border-radius: 50px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #1a5c61;
+     }
+
+
+    ::-webkit-scrollbar-track {
+        background: #031317;
+        border-radius: 50px;
+    }
+    
 }

@@ -82,14 +82,10 @@ dd {
     padding: 10px;
 }
 
-#frm-atualizar-endereco {
-    background-color: var(--background);
-}
-
 .modal-body {
     position: relative;
     flex: 1 1 auto;
-    padding: 4rem 0;
+    padding: 2rem 0;
     width: 80%;
 }
 

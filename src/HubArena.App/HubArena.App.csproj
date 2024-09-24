@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\enderecoPartial.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\style.css" />
   </ItemGroup>
 

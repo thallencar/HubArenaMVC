@@ -1,0 +1,42 @@
+﻿.tb-endereco-details{
+    width: 75%;
+}
+
+.tb-endereco-details th{
+    font-size: 20px;
+}
+
+
+#frm-atualizar-endereco {
+    background-color: var(--background);
+}
+
+.container-btn-form{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.btn-cancelar, .btn-atualizar {
+    font-size: 17px;
+    background: linear-gradient( 180deg, var(--btn-cor-primaria) 0%, var(--btn-cor-secundaria) 100% );
+    color: var(--textos);
+    border-radius: 2px;
+    border-style: none;
+    padding: 12px 25px;
+}
+
+.btn-editar-endereco {   
+    background-color: var(--cor-secundaria);
+    border-radius: 4px;
+    width: 11%;
+    margin: 6px 13px 10px;
+    padding: 6px;
+}
+
+.btn-cancelar {
+    background: none;
+    border: 3px solid;
+    border-image: linear-gradient( to right, var(--btn-cor-primaria), var(--btn-cor-secundaria)) 1;
+}
+

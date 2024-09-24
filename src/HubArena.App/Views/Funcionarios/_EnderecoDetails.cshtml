@@ -1,13 +1,16 @@
 ﻿@using HubArena.Business.Enums
 @model FuncionarioViewModel
 
-<div class="pt-3">
+<link rel="stylesheet" href="~/css/enderecoPartial.css" asp-append-version="true" />
+
+
+<div class="mt-2">
     <div>
-        <h4>Endereço</h4>
+        <h2>Endereço</h2>
     </div>
     @if (Model != null)
     {
-        <table>
+        <table class="tb-endereco-details">
             <thead>
                 <tr>
                     <th>CEP</th>
@@ -30,8 +33,8 @@
                     <td>@Html.DisplayFor(model => model.Endereco.Numero)</td>
                     <td>@Html.DisplayFor(model => model.Endereco.Complemento)</td>
                     <td>
-                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.IdFuncionario" class="btn btn-outline-warning" data-modal="">
-                            <span class="fa fa-pencil-alt"></span>
+                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.IdFuncionario" class="btn btn-editar-endereco" data-modal="">
+                            <img src="~/img/pencil.svg"/>
                         </a>
                     </td>
                 </tr>
